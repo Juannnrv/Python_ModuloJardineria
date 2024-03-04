@@ -1,4 +1,4 @@
-gama_producto = [
+gama_producto =  [
     {
         "gama": "Herbaceas", 
         "descripcion_texto": "Plantas para jardin decorativas", 

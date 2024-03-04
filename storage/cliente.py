@@ -1,4 +1,4 @@
-clientes = [
+clientes =  [
     {
         "codigo_cliente": 1,
         "nombre_cliente": 'GoldFish Garden',

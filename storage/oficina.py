@@ -1,4 +1,4 @@
-oficina = [
+oficina =  [ 
     {
         "codigo_oficina": "BCN-ES",
         "ciudad": "Barcelona",

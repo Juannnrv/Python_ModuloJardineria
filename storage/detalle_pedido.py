@@ -1,4 +1,4 @@
-detalle_pedido = [
+detalle_pedido =  [
     {
         "código_pedido": 1,
         "código_producto": "",

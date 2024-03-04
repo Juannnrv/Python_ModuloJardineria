@@ -1,4 +1,4 @@
-empleados = [
+empleados =  [
     {
         "codigo_empleado": 1,
         "nombre": "Marcos",
