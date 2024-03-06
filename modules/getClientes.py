@@ -35,3 +35,16 @@ def getAllClientPaisRegionCiudad(pais, region=None, ciudad=None):
         ):
             clientZone.append(val)
     return clientZone
+
+def getAllClientesEspañoles(pais):
+    ClientesEspañoles = []
+    for val in cli.clientes:
+        if(val.get('pais') == 'Spain'):
+            ClientesEspañoles.append({
+
+            "codigo_cliente": val.get('codigo_cliente'),
+            "nombre_cliente": val.get('nombre_cliente'),
+            "nombre_contacto": val.get('nombre_contacto'),
+            
+            })
+    return ClientesEspañoles
