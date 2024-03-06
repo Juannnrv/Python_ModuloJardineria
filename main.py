@@ -1,5 +1,7 @@
 from tabulate import tabulate
 
-import modules.getClientes as cliente 
+import modules.getClientes as clientes
 
-print(tabulate(cliente.getAllClientPaisRegionCiudad('Spain', 'Fuenlabrada', 'Madrid'), tablefmt = 'grid'))
+import modules.getOficina as oficina 
+
+print(tabulate(oficina.getAllCiudadTelefono('EEUU'), tablefmt = 'grid'))

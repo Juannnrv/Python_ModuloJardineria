@@ -35,3 +35,4 @@ def getAllClientPaisRegionCiudad(pais, region=None, ciudad=None):
         ):
             clientZone.append(val)
     return clientZone
+
