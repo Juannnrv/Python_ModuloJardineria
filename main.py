@@ -6,4 +6,4 @@ import modules.getOficina as oficina
 
 import modules.getEmpleados as empleado
 
-print(tabulate(clientes.getAllClientesEspañoles(1), tablefmt = 'grid'))
+print(tabulate(clientes.getAllClientesEspañoles('Spain'), tablefmt = 'grid'))

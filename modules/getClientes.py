@@ -45,6 +45,6 @@ def getAllClientesEspañoles(pais):
             "codigo_cliente": val.get('codigo_cliente'),
             "nombre_cliente": val.get('nombre_cliente'),
             "nombre_contacto": val.get('nombre_contacto'),
-            
+            "pais": val.get('pais')
             })
     return ClientesEspañoles
