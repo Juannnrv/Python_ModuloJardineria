@@ -25,7 +25,5 @@ def getAllCiudadTelefono(pais):
                 'pais': val.get('pais')
         }) 
         
-    return ciudadTelefono
-
-
+    return ciudadTelefono 
 
