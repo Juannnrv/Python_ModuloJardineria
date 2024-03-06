@@ -6,4 +6,4 @@ import modules.getOficina as oficina
 
 import modules.getEmpleados as empleado
 
-print(tabulate(empleado.getAllNombrePuestoApellidoEmailJefe(1), tablefmt = 'grid'))
+print(tabulate(empleado.getAllNombreApellidosPuestoNoRepresentantesDeVentas(1), tablefmt = 'grid'))
