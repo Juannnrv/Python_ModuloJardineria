@@ -8,4 +8,6 @@ import modules.getEmpleados as empleado
 
 import modules.getPedidos as pedido
 
-print(tabulate(pedido.getAllEstadosPedidos(), tablefmt = 'grid'))
+import modules.getPagos as pagos
+
+print(tabulate(pagos.getAllPagos2008(), tablefmt='grid'))
