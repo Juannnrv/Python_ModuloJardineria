@@ -10,4 +10,4 @@ import modules.getPedidos as pedido
 
 import modules.getPagos as pagos
 
-print(tabulate(pagos.getAllPagos2008(), tablefmt='grid'))
+print(tabulate(pedido.getAllPedidosAtrasadosDeTiempo(), tablefmt='grid'))
