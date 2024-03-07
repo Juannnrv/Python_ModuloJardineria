@@ -62,18 +62,16 @@ def getAllPedidosEntregados2DiasAntes():
         
 
 def getAllPedidosRechazados2009():
-    codigos_pedidos_repetidos = set() 
     PedidosRechazados2009 = []
 
     for val in ped.pedido:
         codigo_pedido = val.get('codigo_pedido')
         fecha_entrega = val.get('fecha_entrega')
-        if fecha_entrega is not None and fecha_entrega.startswith("2009") and val.get('estado') == "Rechazado" and codigo_pedido not in codigos_pedidos_repetidos:
+        if fecha_entrega is not None and fecha_entrega.startswith("2009") and val.get('estado') == "Rechazado":
             PedidosRechazados2009.append({
                 'codigo_pedido': codigo_pedido,
                 'estado': val.get('estado'),
                 'fecha_entrega': fecha_entrega
             })
-            codigos_pedidos_repetidos.add(codigo_pedido)
 
     return PedidosRechazados2009
