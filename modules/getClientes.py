@@ -1,5 +1,7 @@
 import storage.cliente as cli
 
+from tabulate import tabulate
+
 def getAllClientesName():
     clienteName = []
     for val in cli.clientes:
@@ -48,3 +50,25 @@ def getAllClientesEspañoles(pais):
             "pais": val.get('pais')
             })
     return ClientesEspañoles
+
+def menu():
+    print("""
+  _____                       _                  _        _                  _ _            _            
+ |  __ \                     | |                | |      | |                | (_)          | |           
+ | |__) |___ _ __   ___  _ __| |_ ___  ___    __| | ___  | | ___  ___    ___| |_  ___ _ __ | |_ ___  ___ 
+ |  _  // _ \ '_ \ / _ \| '__| __/ _ \/ __|  / _` |/ _ \ | |/ _ \/ __|  / __| | |/ _ \ '_ \| __/ _ \/ __|
+ | | \ \  __/ |_) | (_) | |  | ||  __/\__ \ | (_| |  __/ | | (_) \__ \ | (__| | |  __/ | | | ||  __/\__ \
+ |_|  \_\___| .__/ \___/|_|   \__\___||___/  \__,_|\___| |_|\___/|___/  \___|_|_|\___|_| |_|\__\___||___/
+            | |                                                                                          
+            |_|                                                                                          
+          
+          1. Obtener todos los clientes (codigo y nombre)
+          2. Obtener un cliente por el codigo (codigo y nombre)
+          3. Obtener toda la informción de un cliente según su límite de crédito y ciudad que pertenece (ejem: 3000.0, San Francisco)
+""")
+    opcion = int(input('\n Seleccione una de las opciones => '))
+    if (opcion == 1):
+        print(tabulate(getAllClientesName(), headers = 'keys', tablefmt = 'github'))
+    elif (opcion == 2):
+        codigoCliente = int(input('\n Ingrese el código del cliente => '))
+        print(tabulate(cli.getOneClientCodigo(codigoCliente), headers = 'keys', tablefmt = 'github')) 
