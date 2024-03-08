@@ -66,9 +66,13 @@ def menu():
           2. Obtener un cliente por el codigo (codigo y nombre)
           3. Obtener toda la informción de un cliente según su límite de crédito y ciudad que pertenece (ejem: 3000.0, San Francisco)
 """)
-    opcion = int(input('\n Seleccione una de las opciones => '))
-    if (opcion == 1):
-        print(tabulate(getAllClientesName(), headers = 'keys', tablefmt = 'github'))
-    elif (opcion == 2):
-        codigoCliente = int(input('\n Ingrese el código del cliente => '))
-        print(tabulate(cli.getOneClientCodigo(codigoCliente), headers = 'keys', tablefmt = 'github')) 
+    opcion = int(input("\nSeleccione una de las opciones "))
+    if opcion == 1:
+        print(tabulate(getAllClientesName(), headers = "keys", tablefmt= "rounded_grid"))
+    elif opcion == 2:
+        codigoCliente = input("Ingrese el código del cliente ")
+        print(tabulate(getOneClientCodigo(), headers = "keys", tablefmt= "rounded_grid"))
+    elif opcion == 3:
+        limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
+        ciudad = input("Ingrese el nombre de la ciudad que desea filtrar: ")
+        print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "rounded_grid"))

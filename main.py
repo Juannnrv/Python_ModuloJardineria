@@ -36,6 +36,3 @@ if(__name__ == "__main__"):
     elif opcion == 5:
         pagos.menu()
     print()
- 
-        
-
