@@ -75,3 +75,20 @@ def getAllPedidosRechazados2009():
             })
 
     return PedidosRechazados2009
+
+def getPedidosEntregadosEnEnero():
+    pedidos_entregados_en_enero = []
+
+    for pedido in ped.pedido:
+        fecha_entrega = pedido.get('fecha_entrega')
+        if fecha_entrega is not None:
+            fecha_entrega_dt = datetime.strptime(fecha_entrega, '%Y-%m-%d')
+            if fecha_entrega_dt.month == 1: 
+                pedidos_entregados_en_enero.append({
+                    'codigo_pedido': pedido.get('codigo_pedido'),
+                    'fecha_entrega': fecha_entrega,
+                    'estado': pedido.get('estado')
+                })
+
+    return pedidos_entregados_en_enero
+
