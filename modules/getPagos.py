@@ -1,4 +1,5 @@
 import storage.pago as pago
+from datetime import datetime
 
 def getAllPagos2008():
     codigos_clientes_vistos = set() 
@@ -17,3 +18,22 @@ def getAllPagos2008():
     return pagos_2008
 
 
+def getAllPedidos2008ConPaypal():
+    pedidos2008Paypal = []
+
+    for val in pago.pago:
+        fecha_pago = val.get('fecha_pago')
+        forma_pago = val.get('forma_pago')
+        if fecha_pago is not None:
+            fecha_pago_dt = datetime.strptime(fecha_pago, '%Y-%m-%d')
+            if fecha_pago_dt.year == 2008 and forma_pago == 'Paypal':
+                pedidos2008Paypal.append({
+
+                    'codigo_cliente': val.get('codigo_cliente'),
+                    'forma_pago': val.get ('forma_pago'),
+                    'fecha_pago': val.get ('fecha_pago')
+                })
+    pedidos2008Paypal.sort(key=lambda x: x['fecha_pago'])
+
+
+    return pedidos2008Paypal
