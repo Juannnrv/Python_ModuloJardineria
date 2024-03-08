@@ -37,3 +37,25 @@ def getAllPedidos2008ConPaypal():
 
 
     return pedidos2008Paypal
+
+
+def getAllFormasDePago():
+    FormasDePagoRepetidas = set()
+    FormasDePago = []
+
+    for val in pago.pago:
+        forma_pago = val.get ('forma_pago')
+        if (val.get ('forma_pago')) is not None and forma_pago not in FormasDePagoRepetidas:
+            FormasDePago.append({
+
+                'codigo_cliente': val.get ('codigo_cliente'),
+                'forma_pago': val.get ('forma_pago')
+            })
+
+            FormasDePagoRepetidas.add(forma_pago)
+
+    return FormasDePago
+            
+
+
+

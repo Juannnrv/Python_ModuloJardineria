@@ -10,4 +10,4 @@ import modules.getPedidos as pedido
 
 import modules.getPagos as pagos
 
-print(tabulate(pagos.getAllPedidos2008ConPaypal(), tablefmt='grid'))
+print(tabulate(pagos.getAllFormasDePago(), tablefmt='grid'))
