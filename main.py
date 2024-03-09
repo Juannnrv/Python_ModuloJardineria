@@ -1,5 +1,4 @@
 from tabulate import tabulate
-import sys
 
 import modules.getClientes as clientes
 import modules.getOficina as oficina

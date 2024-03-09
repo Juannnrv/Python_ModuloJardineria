@@ -1,4 +1,5 @@
 import storage.cliente as cli
+from datetime import datetime
 
 from tabulate import tabulate
 
@@ -12,13 +13,15 @@ def getAllClientsName():
         clienteName.append(codigoName)
     return clienteName
 
-def getAllCodigoClientes(codigo):
+def getOneClientCodigo(codigo):
     for val in cli.clientes:
         if val.get('codigo_cliente') == codigo:
-            return{
-               "codigo_cliente": val.get('codigo_cliente'),
-               "nombre_cliente": val.get('nombre_cliente') 
+            return {
+                "codigo_cliente": val.get('codigo_cliente'),
+                "nombre_cliente": val.get('nombre_cliente') 
             }
+    return None
+
     
 def getAllClientCreditCiudad(limiteCredit, ciudad):
     clienteCredic = []
@@ -63,8 +66,10 @@ def menu():
     if opcion == 1:
         print(tabulate(getAllClientsName(), headers = "keys", tablefmt= "rounded_grid"))
     elif opcion == 2:
-        codigo = input("Ingrese el código del cliente => ")
-        print(tabulate(getAllCodigoClientes(codigo), headers = "keys", tablefmt= "rounded_grid"))
+       codigo = int(input("Ingrese el código del cliente => "))
+       cliente = getOneClientCodigo(codigo)
+       if cliente:
+          print(tabulate([cliente], headers="keys", tablefmt="pretty"))
     elif opcion == 3:
         limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
         ciudad = input("Ingrese su limite crediticio y el nombre de la ciudad que desea filtrar => ")
