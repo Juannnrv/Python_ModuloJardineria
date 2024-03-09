@@ -1,7 +1,8 @@
 import storage.pago as pago
 from datetime import datetime
+from tabulate import tabulate
 
-def getAllPagos2008():
+def getAllClientesPagos2008():
     codigos_clientes_vistos = set() 
     pagos_2008 = []
 
@@ -26,7 +27,7 @@ def getAllPedidos2008ConPaypal():
         forma_pago = val.get('forma_pago')
         if fecha_pago is not None:
             fecha_pago_dt = datetime.strptime(fecha_pago, '%Y-%m-%d')
-            if fecha_pago_dt.year == 2008 and forma_pago == 'Paypal':
+            if fecha_pago_dt.year == 2008 and forma_pago == 'PayPal':
                 pedidos2008Paypal.append({
 
                     'codigo_cliente': val.get('codigo_cliente'),
@@ -48,7 +49,6 @@ def getAllFormasDePago():
         if (val.get ('forma_pago')) is not None and forma_pago not in FormasDePagoRepetidas:
             FormasDePago.append({
 
-                'codigo_cliente': val.get ('codigo_cliente'),
                 'forma_pago': val.get ('forma_pago')
             })
 
@@ -56,6 +56,18 @@ def getAllFormasDePago():
 
     return FormasDePago
             
-
-
-
+def menu():
+    print("""
+        ---REPORTES DE LOS PAGOS---
+          
+          1. Obtener todos los codigos de clientes que han realizado pagos en 2008
+          2. Obtener todos los pagos realizados mediante Paypal en 2008
+          3. Obtener toda las formas de pago
+""")
+    opcion = int(input("\nSeleccione una de las opciones => "))
+    if opcion == 1:
+        print(tabulate(getAllClientesPagos2008(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 2:
+         print(tabulate(getAllPedidos2008ConPaypal(), headers = "keys", tablefmt= "fancy_grid")) 
+    elif opcion == 3:
+         print(tabulate(getAllFormasDePago(), headers = "keys", tablefmt= "fancy_grid"))   

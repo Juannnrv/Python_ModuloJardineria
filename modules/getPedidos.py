@@ -1,16 +1,20 @@
 import storage.pedido as ped
 from datetime import datetime
+from tabulate import tabulate
 
 def getAllEstadosPedidos():
+    EstadosRepetidos = set()
     EstadosPedido = []
 
     for val in ped.pedido:
-        EstadosPedido.append({
+        if val.get('estado') not in EstadosRepetidos:   
+         EstadosPedido.append({
 
-            'codigo_pedido': val.get('codigo_pedido'),
+            
             'estado': val.get ('estado')
 
         })
+        EstadosRepetidos.add(val.get('estado'))
     return EstadosPedido
 
 def getAllPedidosAtrasadosDeTiempo():
@@ -83,7 +87,7 @@ def getPedidosEntregadosEnEnero():
         fecha_entrega = pedido.get('fecha_entrega')
         if fecha_entrega is not None:
             fecha_entrega_dt = datetime.strptime(fecha_entrega, '%Y-%m-%d')
-            if fecha_entrega_dt.month == 1: 
+            if fecha_entrega_dt.month == 1 and pedido.get('estado') == 'Entregado': 
                 pedidos_entregados_en_enero.append({
                     'codigo_pedido': pedido.get('codigo_pedido'),
                     'fecha_entrega': fecha_entrega,
@@ -92,3 +96,25 @@ def getPedidosEntregadosEnEnero():
 
     return pedidos_entregados_en_enero
 
+def menu():
+    print("""
+        ---REPORTES DE LOS PEDIDOS---
+          
+          1. Obtener todos los estados por los que puede pasar un pedido
+          2. Obtener Codigo de los clientes los cuales no les fue entregado el pedido a tiempo junto sus fechas de espera y entrega
+          3. Obtener Codigo de los clientes los cuales les fue entregado el pedido a tiempo con al menos 2 dias de anterioridad
+          4. Obtener todos los pedidos que fueron rechazados en 2009
+          5. Obtener todos los pedidos que fueron entregados en Enero
+    
+""")
+    opcion = int(input("\nSeleccione una de las opciones => "))
+    if opcion == 1:
+         print(tabulate(getAllEstadosPedidos(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 2:
+        print(tabulate(getAllPedidosAtrasadosDeTiempo(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 3:
+        print(tabulate(getAllPedidosEntregados2DiasAntes(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 4:
+        print(tabulate(getAllPedidosRechazados2009(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 5:
+        print(tabulate(getPedidosEntregadosEnEnero(), headers = "keys", tablefmt= "fancy_grid"))

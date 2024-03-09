@@ -2,17 +2,17 @@ import storage.empleado as em
 from tabulate import tabulate
 
 
-def getAllNombreApellidoEmailJefe(codigo):
+def getAllNombreApellidoEmailJefe():
     nombreApellidoEmail = []
     
     for val in em.empleados:
-        if (val.get('codigo_jefe') == codigo):
+        if (val.get('codigo_jefe') == None):
             nombreApellidoEmail.append(
             {
                 'nombre': val.get('nombre'),
                 'apellidos': f'{val.get("apellido1")} {val.get("apellido2")}',
                 'email': val.get('email'),
-                'jefe': val.get('codigo_jefe'),
+                'puesto': val.get('puesto'),
             }
         )
     return nombreApellidoEmail
@@ -33,7 +33,7 @@ def getAllNombrePuestoApellidoEmailJefe():
             )
     return nombrePuestoApellidoEmail
 
-def getAllNombreApellidosPuestoNoRepresentantesDeVentas(codigo):
+def getAllNombreApellidosPuestoNoRepresentantesDeVentas():
     nombreApellidosPuestoNoRepresentantesDeVentas = []
 
     for val in em.empleados:
@@ -53,11 +53,15 @@ def menu():
         ---REPORTES DE LOS EMPLEADOS---
           
           1. Obtener todos los nombres, apellidos y emails de los empleados cuyo jefe tine un codigo igual a 7
-          2. Obtener un cliente por el codigo (codigo y nombre)
-          3. Obtener toda la información de un cliente según su límite de crédito y ciudad que pertenece (ejem: 3000.0, San Francisco)
-          4. Obtener información de todos los clientes españoles
+          2. Obtener información acerca del jefe de la empresa
+          3. Obtener información de los empleados que no son representantes de ventas
 """)
 
     opcion = int(input('\n Seleccione una de las opciones => '))
     if opcion == 1:
      print(tabulate(getAllNombrePuestoApellidoEmailJefe(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 2:
+     print(tabulate(getAllNombreApellidoEmailJefe(), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 3:
+        print(tabulate(getAllNombreApellidosPuestoNoRepresentantesDeVentas(), headers = "keys", tablefmt= "fancy_grid"))
+    
