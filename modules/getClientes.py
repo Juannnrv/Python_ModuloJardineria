@@ -59,11 +59,11 @@ def menu():
     print("""
         ---REPORTES DE LOS CLIENTES---
           
-          1. Obtener todos los clientes (codigo y nombre)
-          2. Obtener un cliente por el codigo (codigo y nombre)
-          3. Obtener toda la información de un cliente según su límite de crédito y ciudad que pertenece (ejem: 3000.0, San Francisco)
+          1. Obtener todos los clientes (código y nombre)
+          2. Obtener un cliente por su código (código y nombre)
+          3. Obtener información detallada de un cliente por límite de crédito y ciudad
           4. Obtener información de todos los clientes españoles
-""")
+    """)
     opcion = int(input("\nSeleccione una de las opciones => "))
     if opcion == 1:
         print(tabulate(getAllClientsName(), headers = "keys", tablefmt= "fancy_grid"))
@@ -73,7 +73,7 @@ def menu():
        if cliente:
           print(tabulate([cliente], headers="keys", tablefmt="fancy_grid"))
     elif opcion == 3:
-        limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
+        limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar => "))
         ciudad = input("Ingrese su limite crediticio y el nombre de la ciudad que desea filtrar => ")
         print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "fancy_grid"))
     elif opcion == 4:

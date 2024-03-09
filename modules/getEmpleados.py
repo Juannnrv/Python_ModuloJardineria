@@ -52,16 +52,17 @@ def menu():
     print("""
         ---REPORTES DE LOS EMPLEADOS---
           
-          1. Obtener todos los nombres, apellidos y emails de los empleados cuyo jefe tine un codigo igual a 7
-          2. Obtener información acerca del jefe de la empresa
+          1. Obtener nombres, apellidos y emails de los empleados cuyo jefe tiene un código igual a 7
+          2. Obtener información sobre el jefe de la empresa
           3. Obtener información de los empleados que no son representantes de ventas
-""")
+    """)
 
-    opcion = int(input('\n Seleccione una de las opciones => '))
+    opcion = int(input('Seleccione una de las opciones => '))
     if opcion == 1:
-     print(tabulate(getAllNombrePuestoApellidoEmailJefe(), headers = "keys", tablefmt= "fancy_grid"))
+        print(tabulate(getAllNombrePuestoApellidoEmailJefe(), headers="keys", tablefmt="fancy_grid"))
     elif opcion == 2:
-     print(tabulate(getAllNombreApellidoEmailJefe(), headers = "keys", tablefmt= "fancy_grid"))
+        print(tabulate(getAllNombreApellidoEmailJefe(), headers="keys", tablefmt="fancy_grid"))
     elif opcion == 3:
-        print(tabulate(getAllNombreApellidosPuestoNoRepresentantesDeVentas(), headers = "keys", tablefmt= "fancy_grid"))
+        print(tabulate(getAllNombreApellidosPuestoNoRepresentantesDeVentas(), headers="keys", tablefmt="fancy_grid"))
+
     

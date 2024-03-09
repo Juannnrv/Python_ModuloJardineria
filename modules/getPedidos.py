@@ -64,7 +64,6 @@ def getAllPedidosEntregados2DiasAntes():
 
     return PedidosEntregados2DiasAntes
         
-
 def getAllPedidosRechazados2009():
     PedidosRechazados2009 = []
 
