@@ -1,5 +1,4 @@
 import storage.cliente as cli
-from datetime import datetime
 
 from tabulate import tabulate
 
@@ -41,7 +40,7 @@ def getAllClientPaisRegionCiudad(pais, region=None, ciudad=None):
             clientZone.append(val)
     return clientZone
 
-def getAllClientesEspañoles(pais):
+def getAllClientesEspañoles():
     ClientesEspañoles = []
     for val in cli.clientes:
         if(val.get('pais') == 'Spain'):
@@ -50,27 +49,32 @@ def getAllClientesEspañoles(pais):
             "codigo_cliente": val.get('codigo_cliente'),
             "nombre_cliente": val.get('nombre_cliente'),
             "nombre_contacto": val.get('nombre_contacto'),
+            'ciudad': val.get ('ciudad'),
+            'region': val.get('region'),
             "pais": val.get('pais')
             })
     return ClientesEspañoles
 
 def menu():
     print("""
-        REPORTES DE LOS CLIENTES
+        ---REPORTES DE LOS CLIENTES---
           
           1. Obtener todos los clientes (codigo y nombre)
           2. Obtener un cliente por el codigo (codigo y nombre)
-          3. Obtener toda la informción de un cliente según su límite de crédito y ciudad que pertenece (ejem: 3000.0, San Francisco)
+          3. Obtener toda la información de un cliente según su límite de crédito y ciudad que pertenece (ejem: 3000.0, San Francisco)
+          4. Obtener información de todos los clientes españoles
 """)
     opcion = int(input("\nSeleccione una de las opciones => "))
     if opcion == 1:
-        print(tabulate(getAllClientsName(), headers = "keys", tablefmt= "rounded_grid"))
+        print(tabulate(getAllClientsName(), headers = "keys", tablefmt= "fancy_grid"))
     elif opcion == 2:
        codigo = int(input("Ingrese el código del cliente => "))
        cliente = getOneClientCodigo(codigo)
        if cliente:
-          print(tabulate([cliente], headers="keys", tablefmt="pretty"))
+          print(tabulate([cliente], headers="keys", tablefmt="fancy_grid"))
     elif opcion == 3:
         limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
         ciudad = input("Ingrese su limite crediticio y el nombre de la ciudad que desea filtrar => ")
-        print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "rounded_grid"))
+        print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "fancy_grid"))
+    elif opcion == 4:
+        print(tabulate(getAllClientesEspañoles(), headers = 'keys', tablefmt = 'fancy_grid'))
