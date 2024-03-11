@@ -49,20 +49,26 @@ def getAllNombreApellidosPuestoNoRepresentantesDeVentas():
     return nombreApellidosPuestoNoRepresentantesDeVentas
 
 def menu():
-    print("""
+    while True:
+
+     print("""
         ---REPORTES DE LOS EMPLEADOS---
           
           1. Obtener nombres, apellidos y emails de los empleados cuyo jefe tiene un código igual a 7
           2. Obtener información sobre el jefe de la empresa
           3. Obtener información de los empleados que no son representantes de ventas
+          0. Regresar al menú principal
     """)
 
-    opcion = int(input('Seleccione una de las opciones => '))
-    if opcion == 1:
+     opcion = int(input('Seleccione una de las opciones => '))
+     if opcion == 1:
         print(tabulate(getAllNombrePuestoApellidoEmailJefe(), headers="keys", tablefmt="fancy_grid"))
-    elif opcion == 2:
+     elif opcion == 2:
         print(tabulate(getAllNombreApellidoEmailJefe(), headers="keys", tablefmt="fancy_grid"))
-    elif opcion == 3:
+     elif opcion == 3:
         print(tabulate(getAllNombreApellidosPuestoNoRepresentantesDeVentas(), headers="keys", tablefmt="fancy_grid"))
+     elif opcion == 0:
+         print()
+         break
 
     

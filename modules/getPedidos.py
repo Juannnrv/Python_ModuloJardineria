@@ -96,7 +96,8 @@ def getPedidosEntregadosEnEnero():
     return pedidos_entregados_en_enero
 
 def menu():
-    print("""
+    while True:
+     print("""
         ---REPORTES DE LOS PEDIDOS---
           
           1. Obtener todos los estados por los que puede pasar un pedido
@@ -104,16 +105,20 @@ def menu():
           3. Obtener Codigo de los clientes los cuales les fue entregado el pedido a tiempo con al menos 2 dias de anterioridad
           4. Obtener todos los pedidos que fueron rechazados en 2009
           5. Obtener todos los pedidos que fueron entregados en Enero
+          0. Regresar al menú principal
     
 """)
-    opcion = int(input("\nSeleccione una de las opciones => "))
-    if opcion == 1:
+     opcion = int(input("\nSeleccione una de las opciones => "))
+     if opcion == 1:
          print(tabulate(getAllEstadosPedidos(), headers = "keys", tablefmt= "fancy_grid"))
-    elif opcion == 2:
+     elif opcion == 2:
         print(tabulate(getAllPedidosAtrasadosDeTiempo(), headers = "keys", tablefmt= "fancy_grid"))
-    elif opcion == 3:
+     elif opcion == 3:
         print(tabulate(getAllPedidosEntregados2DiasAntes(), headers = "keys", tablefmt= "fancy_grid"))
-    elif opcion == 4:
+     elif opcion == 4:
         print(tabulate(getAllPedidosRechazados2009(), headers = "keys", tablefmt= "fancy_grid"))
-    elif opcion == 5:
+     elif opcion == 5:
         print(tabulate(getPedidosEntregadosEnEnero(), headers = "keys", tablefmt= "fancy_grid"))
+     elif opcion == 0:
+        print()
+        break

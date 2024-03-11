@@ -56,25 +56,31 @@ def getAllClientesEspañoles():
     return ClientesEspañoles
 
 def menu():
-    print("""
+    while True:
+
+     print("""
         ---REPORTES DE LOS CLIENTES---
           
           1. Obtener todos los clientes (código y nombre)
           2. Obtener un cliente por su código (código y nombre)
           3. Obtener información detallada de un cliente por límite de crédito y ciudad
           4. Obtener información de todos los clientes españoles
+          0. Regresar al menú principal
     """)
-    opcion = int(input("\nSeleccione una de las opciones => "))
-    if opcion == 1:
+     opcion = int(input("\nSeleccione una de las opciones => "))
+     if opcion == 1:
         print(tabulate(getAllClientsName(), headers = "keys", tablefmt= "fancy_grid"))
-    elif opcion == 2:
+     elif opcion == 2:
        codigo = int(input("Ingrese el código del cliente => "))
        cliente = getOneClientCodigo(codigo)
        if cliente:
           print(tabulate([cliente], headers="keys", tablefmt="fancy_grid"))
-    elif opcion == 3:
+     elif opcion == 3:
         limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar => "))
         ciudad = input("Ingrese su limite crediticio y el nombre de la ciudad que desea filtrar => ")
         print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "fancy_grid"))
-    elif opcion == 4:
+     elif opcion == 4:
         print(tabulate(getAllClientesEspañoles(), headers = 'keys', tablefmt = 'fancy_grid'))
+     elif opcion == 0:
+         print()
+         break
