@@ -65,15 +65,20 @@ def menu():
           1. Obtener todos los codigos de clientes que han realizado pagos en 2008
           2. Obtener todos los pagos realizados mediante Paypal en 2008
           3. Obtener toda las formas de pago
-          0. Regresar al menú principal
+          
+       Presiona (Ctrl + C) para regresar al menú principal
 """)
-     opcion = int(input("\nSeleccione una de las opciones => "))
-     if opcion == 1:
+     try:
+         
+      opcion = int(input("\nSeleccione una de las opciones => "))
+      if opcion == 1:
         print(tabulate(getAllClientesPagos2008(), headers = "keys", tablefmt= "fancy_grid"))
-     elif opcion == 2:
+      elif opcion == 2:
          print(tabulate(getAllPedidos2008ConPaypal(), headers = "keys", tablefmt= "fancy_grid")) 
-     elif opcion == 3:
+      elif opcion == 3:
          print(tabulate(getAllFormasDePago(), headers = "keys", tablefmt= "fancy_grid")) 
-     elif opcion == 0:
+     except KeyboardInterrupt:
          print()
+         print()
+         print('SALIENDO...')
          break

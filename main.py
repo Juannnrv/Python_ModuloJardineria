@@ -7,10 +7,9 @@ import modules.getPedidos as pedido
 import modules.getPagos as pagos
 import modules.getProducto as producto 
 
-if(__name__ == "__main__"):
+if __name__ == "__main__":
     while True:
-
-     print(''' 
+        print(''' 
                     ---MENÚ PRINCIPAL---
             
                         1. Clientes
@@ -19,23 +18,25 @@ if(__name__ == "__main__"):
                         4. Pedidos
                         5. Pagos
                         6. Productos
-                        0. Salir
-          
+              
+                 Presiona (Ctrl + C) para Salir
 ''')
-     opcion = int(input('\n Seleccione una de las opciones => '))
-     if opcion == 1:
-        clientes.menu()
-     elif opcion == 2:
-        oficina.menu()
-     elif opcion == 3:
-        empleado.menu()
-     elif opcion == 4: 
-        pedido.menu()
-     elif opcion == 5:
-        pagos.menu()
-     elif opcion == 6:
-        producto.menu()
-     elif opcion == 0:
-        print() 
-        break 
+        try:
+            opcion = int(input('\n Seleccione una de las opciones => '))
+            if opcion == 1:
+                clientes.menu()
+            elif opcion == 2:
+                oficina.menu()
+            elif opcion == 3:
+                empleado.menu()
+            elif opcion == 4: 
+                pedido.menu()
+            elif opcion == 5:
+                pagos.menu()
+            elif opcion == 6:
+                producto.menu()
+        except KeyboardInterrupt:
+              print('SALIENDO...')
+              break
+
      
