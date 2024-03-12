@@ -48,6 +48,7 @@ def getAllNombreApellidosPuestoNoRepresentantesDeVentas():
             )
     return nombreApellidosPuestoNoRepresentantesDeVentas
 
+
 def menu():
     while True:
 

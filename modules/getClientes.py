@@ -1,4 +1,6 @@
 import storage.cliente as cli
+import storage.empleado as em
+import storage.pago as pago
 
 from tabulate import tabulate
 
@@ -55,6 +57,76 @@ def getAllClientesEspañoles():
             })
     return ClientesEspañoles
 
+def getAllMadridClients():
+   ClientesMadrid = []
+   for val in cli.clientes:
+      if (val.get('ciudad') == 'Madrid'):
+         if (val.get('codigo_empleado_rep_ventas') == 30) or (val.get('codigo_empleado_rep_ventas') == 11):
+          ClientesMadrid.append({
+
+            "codigo del cliente": val.get('codigo_cliente'),
+            "nombre del cliente": val.get('nombre_cliente'),
+            'ciudad': val.get ('ciudad'),
+            'codigo_empleado_rep_ventas': val.get('codigo_empleado_rep_ventas'),
+
+         })
+
+   return ClientesMadrid      
+
+def getAllRepVentasNombreApellido():
+    NombreApellidoRepVentasClientes = []
+    for clientes in cli.clientes:
+        for empleados in em.empleados:
+            if clientes.get('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
+                if empleados.get('puesto') == 'Representante Ventas':
+                    NombreApellidoRepVentasClientes.append({
+                        'nombre_cliente': clientes.get('nombre_cliente'),
+                        "nombre": empleados.get('nombre'),
+                        'apellido1': empleados.get('apellido1'),
+                        'puesto': empleados.get('puesto')
+                    })
+    return NombreApellidoRepVentasClientes
+
+def getAllPagosClientesPagos():
+   PagosClientes = []
+   for clientes in cli.clientes:
+        for pagos in pago.pago:
+            for empleados in em.empleados:
+              if clientes.get ('codigo_cliente') == pagos.get('codigo_cliente'):
+                 if clientes.get ('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
+                    if empleados.get('puesto') == 'Representante Ventas':
+                     PagosClientes.append({
+
+                       "codigo del cliente": clientes.get('codigo_cliente'),
+                       'nombre del cliente': clientes.get('nombre_cliente'),
+                       'id transaccion del pago': pagos.get('id_transaccion'),
+                       'puesto': empleados.get('puesto'),
+                       'nombre representante de ventas': empleados.get('nombre')
+                    })
+   return PagosClientes
+                  
+def getAllClientesNoPagos():
+    ClientesNoPagos = []
+    for clientes in cli.clientes:
+        tiene_pagos = False
+        for pagos in pago.pago:
+            if clientes.get('codigo_cliente') == pagos.get('codigo_cliente'):
+                tiene_pagos = True
+                break
+        if not tiene_pagos:
+            for empleados in em.empleados:
+                if clientes.get('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
+                    if empleados.get('puesto') == 'Representante Ventas':
+                        ClientesNoPagos.append({
+
+                            "codigo del cliente": clientes.get('codigo_cliente'),
+                            'nombre del cliente': clientes.get('nombre_cliente'),
+                            'puesto': empleados.get('puesto'),
+                            'nombre representante de ventas': empleados.get('nombre')
+                        })
+    return ClientesNoPagos
+
+
 def menu():
     while True:
 
@@ -65,7 +137,11 @@ def menu():
           2. Obtener un cliente por su código (código y nombre)
           3. Obtener información detallada de un cliente por límite de crédito y ciudad
           4. Obtener información de todos los clientes españoles
-           
+          5. Obtener información de todos los clientes de la ciudad de Madrid cuyo representante de ventas tenga el código de empleado 11 o 30
+          6. Obtener nombre y apellidos del representante de ventas de todos los clientes
+          7. Obtener nombre de los clientes junto sus representantes de ventas que hayan hecho pagos 
+          8. Obtener el nombre de todos los clientes junto sus representantes de ventas que no hayan realizado pagos  
+             
        Presiona (Ctrl + C) para regresar al menú principal
     """)
      try:
@@ -84,6 +160,14 @@ def menu():
         print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "fancy_grid"))
       elif opcion == 4:
         print(tabulate(getAllClientesEspañoles(), headers = 'keys', tablefmt = 'fancy_grid'))
+      elif opcion == 5:
+         print(tabulate(getAllMadridClients(), headers = 'keys', tablefmt = 'fancy_grid'))
+      elif opcion == 6:
+         print(tabulate(getAllRepVentasNombreApellido(), headers = 'keys', tablefmt = 'fancy_grid'))
+      elif opcion == 7:
+         print(tabulate(getAllPagosClientesPagos(), headers = 'keys', tablefmt = 'fancy_grid'))
+      elif opcion == 8:
+         print(tabulate(getAllClientesNoPagos(), headers = 'keys', tablefmt = 'fancy_grid'))      
      except KeyboardInterrupt:
          print()
          print()
