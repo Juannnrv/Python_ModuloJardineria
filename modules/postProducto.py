@@ -2,9 +2,6 @@ import json
 import requests
 import os
 from tabulate import tabulate
-import json
-import requests
-import modules.getGamas as gG
 
 def postProducto():
     #json-server storage/producto.json -b 5502

@@ -1,12 +1,20 @@
-import storage.cliente as cli
 import storage.empleado as em
 import storage.pago as pago
+import requests
 
 from tabulate import tabulate
 
+
+def getAllDataClients():
+   #json-server storage/producto.json -b 5502
+   peticion = requests.get("http://172.16.106.67:5005")
+   data = peticion.json()
+   return data
+
+
 def getAllClientsName():
     clienteName = []
-    for val in cli.clientes:
+    for val in getAllDataClients():
         codigoName = dict({
             "codigo_cliente": val.get('codigo_cliente'),
             "nombre_cliente": val.get('nombre_cliente')
@@ -15,7 +23,7 @@ def getAllClientsName():
     return clienteName
 
 def getOneClientCodigo(codigo):
-    for val in cli.clientes:
+    for val in getAllDataClients():
         if val.get('codigo_cliente') == codigo:
             return {
                 "codigo_cliente": val.get('codigo_cliente'),
@@ -26,14 +34,14 @@ def getOneClientCodigo(codigo):
     
 def getAllClientCreditCiudad(limiteCredit, ciudad):
     clienteCredic = []
-    for val in cli.clientes:
+    for val in getAllDataClients():
         if(val.get('limite_credito') >= limiteCredit and val.get('ciudad') == ciudad):
             clienteCredic.append(val)
     return clienteCredic
 
 def getAllClientPaisRegionCiudad(pais, region=None, ciudad=None):
     clientZone = []
-    for val in cli.clientes:
+    for val in getAllDataClients():
         if(
             val.get('pais') == pais and 
             (val.get('region') == region or val.get('region') == None) and
@@ -44,7 +52,7 @@ def getAllClientPaisRegionCiudad(pais, region=None, ciudad=None):
 
 def getAllClientesEspañoles():
     ClientesEspañoles = []
-    for val in cli.clientes:
+    for val in getAllDataClients():
         if(val.get('pais') == 'Spain'):
             ClientesEspañoles.append({
 
@@ -59,7 +67,7 @@ def getAllClientesEspañoles():
 
 def getAllMadridClients():
    ClientesMadrid = []
-   for val in cli.clientes:
+   for val in getAllDataClients():
       if (val.get('ciudad') == 'Madrid'):
          if (val.get('codigo_empleado_rep_ventas') == 30) or (val.get('codigo_empleado_rep_ventas') == 11):
           ClientesMadrid.append({
@@ -75,7 +83,7 @@ def getAllMadridClients():
 
 def getAllRepVentasNombreApellido():
     NombreApellidoRepVentasClientes = []
-    for clientes in cli.clientes:
+    for clientes in getAllDataClients():
         for empleados in em.empleados:
             if clientes.get('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
                 if empleados.get('puesto') == 'Representante Ventas':
@@ -89,7 +97,7 @@ def getAllRepVentasNombreApellido():
 
 def getAllPagosClientesPagos():
    PagosClientes = []
-   for clientes in cli.clientes:
+   for clientes in getAllDataClients():
         for pagos in pago.pago:
             for empleados in em.empleados:
               if clientes.get ('codigo_cliente') == pagos.get('codigo_cliente'):
@@ -107,7 +115,7 @@ def getAllPagosClientesPagos():
                   
 def getAllClientesNoPagos():
     ClientesNoPagos = []
-    for clientes in cli.clientes:
+    for clientes in getAllDataClients():
         tiene_pagos = False
         for pagos in pago.pago:
             if clientes.get('codigo_cliente') == pagos.get('codigo_cliente'):

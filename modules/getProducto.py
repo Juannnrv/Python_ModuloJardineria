@@ -2,7 +2,7 @@ import requests
 from tabulate import tabulate
 import os
 
-def getAllData():
+def getAllDataProduct():
    #json-server storage/producto.json -b 5502
    peticion = requests.get("http://172.16.100.116:5502")
    data = peticion.json()
@@ -10,7 +10,7 @@ def getAllData():
 
 def getAllStocksPriceGama():
     stockPriceGama = []
-    for val in getAllData():
+    for val in getAllDataProduct():
         gama = val.get('gama')
         stock = val.get('cantidad_en_stock')
         if gama == 'Ornamentales' and stock >= 100:
