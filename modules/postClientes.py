@@ -5,7 +5,7 @@ from tabulate import tabulate
 
 
 def postClientes():
-    #json-server storage/cliente.json -b 5502
+    #json-server storage/cliente.json -b 5503
 
     cliente = {
         'codigo_producto': int(input('Ingrese el código del producto => ')),
@@ -24,7 +24,7 @@ def postClientes():
         'limite_credito': int(input('Ingrese el limite crediticio => '))
     }
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post('http://172.16.106.67:5005', headers=headers, data=json.dumps(cliente)) 
+    peticion = requests.post('http://172.16.100.116:5503', headers=headers, data=json.dumps(cliente)) 
     res = peticion.json()
     res ['Mensaje'] = 'Cliente Guardado'
     return [res]

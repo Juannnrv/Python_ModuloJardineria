@@ -1,9 +1,10 @@
 import requests
 from tabulate import tabulate
+import os
 
 def getAllDataOficina():
    #json-server storage/oficina.json -b 5007
-   peticion = requests.get("http://172.16.100.116:5007")
+   peticion = requests.get("http://172.16.100.116:5504")
    data = peticion.json()
    return data
 
@@ -22,7 +23,8 @@ def getAllCodigoCiudad():
 def getAllCiudadTelefonoEspaña():
     ciudadTelefono = []
     for val in getAllDataOficina():
-        if(val.get('pais') == 'España'):
+        pais = val.get('pais')
+        if pais == 'España':
             ciudadTelefono.append({
 
                 'oficinas': val.get('codigo_oficina'),
@@ -34,6 +36,7 @@ def getAllCiudadTelefonoEspaña():
     return ciudadTelefono 
 
 def menu():
+    os.system('clear')
     while True:
 
      print("""

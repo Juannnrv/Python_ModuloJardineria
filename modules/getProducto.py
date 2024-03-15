@@ -8,6 +8,11 @@ def getAllDataProduct():
    data = peticion.json()
    return data
 
+def getProductoCodigo(codigo):
+   for val in getAllDataProduct():
+      if(val.get('codigo_producto') == codigo):
+         return [val]
+
 def getAllStocksPriceGama():
     stockPriceGama = []
     for val in getAllDataProduct():

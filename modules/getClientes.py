@@ -6,8 +6,8 @@ from tabulate import tabulate
 
 
 def getAllDataClients():
-   #json-server storage/producto.json -b 5502
-   peticion = requests.get("http://172.16.106.67:5005")
+   #json-server storage/producto.json -b 5503
+   peticion = requests.get('http://172.16.100.116:5503')
    data = peticion.json()
    return data
 

@@ -18,7 +18,7 @@ def postOficina():
     }
 
     headers = {'Content-Type': 'application/json', 'charser': 'UTF-8'}
-    peticion = requests.post('http://172.16.106.67:5007', headers=headers, data=json.dumps(oficina))
+    peticion = requests.post('http://172.16.100.116:5504', headers=headers, data=json.dumps(oficina))
     res = peticion.json()
     res ['Mensaje'] = 'Oficina Guardada'
     return [res]
