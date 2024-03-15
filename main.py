@@ -1,4 +1,5 @@
 import os
+import re
 from tabulate import tabulate
 
 
@@ -32,10 +33,13 @@ def menuClientes():
         ''')      
         try:
            opcion = int(input("\nSelecione una de las opciones => "))
-           if(opcion == 1):
-            Repclientes.menu()
-           elif(opcion == 2):
-            CRUDclientes.menu()
+           if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=2):
+                    if(opcion == 1):
+                        Repclientes.menu()
+                    elif(opcion == 2):
+                        CRUDclientes.menu()
         except KeyboardInterrupt:
               print('SALIENDO...')
               break
@@ -54,10 +58,13 @@ def menuOficina():
 """)       
      try:
         opcion = int(input('\nSelecciones una de las opciones => '))
-        if opcion == 1:
-            Repoficina.menu()
-        elif opcion == 2:
-            CRUDoficina.menu()
+        if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=2):
+                    if opcion == 1:
+                        Repoficina.menu()
+                    elif opcion == 2:
+                        CRUDoficina.menu()
      except KeyboardInterrupt:
         print()
         print()
@@ -79,10 +86,13 @@ def menuEmpleados():
 """)        
         try:
             opcion = int(input('\nSeleccione una de las opciones => '))
-            if opcion == 1:
-                Repempleado.menu()
-            elif opcion == 2:
-                CRUDempleados.menu()
+            if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=2):
+                    if opcion == 1:
+                        Repempleado.menu()
+                    elif opcion == 2:
+                        CRUDempleados.menu()
         except KeyboardInterrupt:
             print()
             print()
@@ -102,10 +112,13 @@ def menuProducto():
         ''')      
         try:
            opcion = int(input("\nSelecione una de las opciones: "))
-           if(opcion == 1):
-            Repproducto.menu()
-           elif(opcion == 2):
-            CRUDproducto.menu()
+           if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=2):
+                    if(opcion == 1):
+                        Repproducto.menu()
+                    elif(opcion == 2):
+                        CRUDproducto.menu()
         except KeyboardInterrupt:
               print('SALIENDO...')
               break
@@ -128,20 +141,23 @@ if __name__ == "__main__":
 ''')
         try:
             opcion = int(input('\n Seleccione una de las opciones => '))
-            if opcion == 1:
-                menuClientes()
-            elif opcion == 2:
-                menuOficina()
-            elif opcion == 3:
-                menuEmpleados()
-            elif opcion == 4: 
-                pedido.menu()
-            elif opcion == 5:
-                pagos.menu()
-            elif opcion == 6:
-                menuProducto()
+            if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=5):
+                    if opcion == 1:
+                        menuClientes()
+                    elif opcion == 2:
+                        menuOficina()
+                    elif opcion == 3:
+                        menuEmpleados()
+                    elif opcion == 4: 
+                        pedido.menu()
+                    elif opcion == 5:
+                        pagos.menu()
+                    elif opcion == 6:
+                        menuProducto()
         except KeyboardInterrupt:
-              print('SALIENDO...')
-              break
+            print('SALIENDO...')
+            break
 
      
