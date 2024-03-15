@@ -5,9 +5,11 @@ from tabulate import tabulate
 import modules.getClientes as Repclientes
 import modules.postClientes as CRUDclientes
 from modules import postClientes
-import modules.getOficina as oficina
-"""import modules.postOficinas as CRUDoficinas
-from modules import"""
+
+import modules.getOficina as Repoficina
+import modules.postOficinas as CRUDoficina
+from modules import postOficinas
+
 import modules.getEmpleados as Repempleado
 import modules.postEmpleados as CRUDempleados
 from modules import postEmpleados
@@ -38,6 +40,31 @@ def menuClientes():
               print('SALIENDO...')
               break
         
+def menuOficina():
+    while True:
+     os.system('clear')
+     print(""" 
+                    ---BIENVENIDO AL MENÚ DE OFICINAS---
+            
+                1. Reportes de las oficinas
+                2. Guardar, Actualizar y Eliminar oficina
+              
+                        Presiona (Ctrl + C) para Salir
+
+""")       
+     try:
+        opcion = int(input('\nSelecciones una de las opciones => '))
+        if opcion == 1:
+            Repoficina.menu()
+        elif opcion == 2:
+            CRUDoficina.menu()
+     except KeyboardInterrupt:
+        print()
+        print()
+        print('SALIENDO...')
+        break        
+
+
 def menuEmpleados():
     while True:
         os.system('clear')
@@ -104,7 +131,7 @@ if __name__ == "__main__":
             if opcion == 1:
                 menuClientes()
             elif opcion == 2:
-                oficina.menu()
+                menuOficina()
             elif opcion == 3:
                 menuEmpleados()
             elif opcion == 4: 
