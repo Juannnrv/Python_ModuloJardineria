@@ -16,6 +16,7 @@ import modules.postEmpleados as CRUDempleados
 from modules import postEmpleados
 import modules.getPedidos as pedido
 import modules.getPagos as pagos
+
 import modules.getProducto as Repproducto
 import modules.postProducto as CRUDproducto
 from modules import postProducto
@@ -32,8 +33,8 @@ def menuClientes():
                         Presiona (Ctrl + C) para Salir
         ''')      
         try:
-           opcion = int(input("\nSelecione una de las opciones => "))
-           if(re.match(r'[0-9]+$', opcion) is not None):
+           opcion = (input("\nSelecione una de las opciones => "))
+           if(re.match(r'\d+', opcion) is not None):
                  opcion = int(opcion)
                  if (opcion>=0 and opcion<=2):
                     if(opcion == 1):
@@ -57,7 +58,7 @@ def menuOficina():
 
 """)       
      try:
-        opcion = int(input('\nSelecciones una de las opciones => '))
+        opcion = (input('\nSelecciones una de las opciones => '))
         if(re.match(r'[0-9]+$', opcion) is not None):
                  opcion = int(opcion)
                  if (opcion>=0 and opcion<=2):
@@ -85,7 +86,7 @@ def menuEmpleados():
 
 """)        
         try:
-            opcion = int(input('\nSeleccione una de las opciones => '))
+            opcion = (input('\nSeleccione una de las opciones => '))
             if(re.match(r'[0-9]+$', opcion) is not None):
                  opcion = int(opcion)
                  if (opcion>=0 and opcion<=2):
@@ -111,7 +112,7 @@ def menuProducto():
                         Presiona (Ctrl + C) para Salir
         ''')      
         try:
-           opcion = int(input("\nSelecione una de las opciones: "))
+           opcion = (input("\nSelecione una de las opciones: "))
            if(re.match(r'[0-9]+$', opcion) is not None):
                  opcion = int(opcion)
                  if (opcion>=0 and opcion<=2):
@@ -140,7 +141,7 @@ if __name__ == "__main__":
                  Presiona (Ctrl + C) para Salir
 ''')
         try:
-            opcion = int(input('\n Seleccione una de las opciones => '))
+            opcion = (input('\n Seleccione una de las opciones => '))
             if(re.match(r'[0-9]+$', opcion) is not None):
                  opcion = int(opcion)
                  if (opcion>=0 and opcion<=5):

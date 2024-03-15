@@ -2,7 +2,7 @@ import json
 import requests
 import os
 import re
-import getProducto as gP
+import modules.getProducto as gP
 from tabulate import tabulate
 
 def postProducto():
