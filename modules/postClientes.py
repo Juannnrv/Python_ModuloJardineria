@@ -23,7 +23,7 @@ def postClientes():
         'codigo_empleado_rep_ventas': int(input('Ingresa el codigo del representante de ventas => ')),
         'limite_credito': int(input('Ingrese el limite crediticio => '))
     }
-    headers = {'Content-Type': 'application/json', 'charset': 'UTF -8'}
+    headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
     peticion = requests.post('http://172.16.106.67:5005', headers=headers, data=json.dumps(cliente)) 
     res = peticion.json()
     res ['Mensaje'] = 'Cliente Guardado'
