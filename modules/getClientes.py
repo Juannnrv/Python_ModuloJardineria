@@ -1,4 +1,4 @@
-import storage.empleado as em
+import modules.getEmpleados as em
 import storage.pago as pago
 import requests
 
@@ -84,7 +84,7 @@ def getAllMadridClients():
 def getAllRepVentasNombreApellido():
     NombreApellidoRepVentasClientes = []
     for clientes in getAllDataClients():
-        for empleados in em.empleados:
+        for empleados in em.getAllDataEmpleados():
             if clientes.get('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
                 if empleados.get('puesto') == 'Representante Ventas':
                     NombreApellidoRepVentasClientes.append({
@@ -99,7 +99,7 @@ def getAllPagosClientesPagos():
    PagosClientes = []
    for clientes in getAllDataClients():
         for pagos in pago.pago:
-            for empleados in em.empleados:
+            for empleados in em.getAllDataEmpleados():
               if clientes.get ('codigo_cliente') == pagos.get('codigo_cliente'):
                  if clientes.get ('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
                     if empleados.get('puesto') == 'Representante Ventas':
@@ -122,7 +122,7 @@ def getAllClientesNoPagos():
                 tiene_pagos = True
                 break
         if not tiene_pagos:
-            for empleados in em.empleados:
+            for empleados in em.getAllDataEmpleados():
                 if clientes.get('codigo_empleado_rep_ventas') == empleados.get('codigo_empleado'):
                     if empleados.get('puesto') == 'Representante Ventas':
                         ClientesNoPagos.append({
