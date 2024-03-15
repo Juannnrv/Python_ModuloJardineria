@@ -28,7 +28,7 @@ def menu():
     while True:
         os.system('clear')
         print("""
-               ---ADMINISTRADOR DATOS DE CLIENTES---
+               ---ADMINISTRADOR DATOS DE EMPLEADOS---
           
                     1. Guardar un empleado nuevo
          
