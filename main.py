@@ -1,11 +1,16 @@
-from tabulate import tabulate
 import os
+from tabulate import tabulate
+
 
 import modules.getClientes as Repclientes
 import modules.postClientes as CRUDclientes
 from modules import postClientes
 import modules.getOficina as oficina
-import modules.getEmpleados as empleado
+"""import modules.postOficinas as CRUDoficinas
+from modules import"""
+import modules.getEmpleados as Repempleado
+import modules.postEmpleados as CRUDempleados
+from modules import postEmpleados
 import modules.getPedidos as pedido
 import modules.getPagos as pagos
 import modules.getProducto as Repproducto
@@ -24,7 +29,7 @@ def menuClientes():
                         Presiona (Ctrl + C) para Salir
         ''')      
         try:
-           opcion = int(input("\nSelecione una de las opciones: "))
+           opcion = int(input("\nSelecione una de las opciones => "))
            if(opcion == 1):
             Repclientes.menu()
            elif(opcion == 2):
@@ -33,6 +38,29 @@ def menuClientes():
               print('SALIENDO...')
               break
         
+def menuEmpleados():
+    while True:
+        os.system('clear')
+        print(""" 
+                    ---BIENVENIDO AL MENÚ DE EMPLEADOS---
+            
+                1. Reportes de los empleados
+                2. Guardar, Actualizar y Eliminar empleados
+              
+                        Presiona (Ctrl + C) para Salir
+
+""")        
+        try:
+            opcion = int(input('\nSeleccione una de las opciones => '))
+            if opcion == 1:
+                Repempleado.menu()
+            elif opcion == 2:
+                CRUDempleados.menu()
+        except KeyboardInterrupt:
+            print()
+            print()
+            print('SALIENDO...')
+            break            
 
 def menuProducto():
     while True:
@@ -78,7 +106,7 @@ if __name__ == "__main__":
             elif opcion == 2:
                 oficina.menu()
             elif opcion == 3:
-                empleado.menu()
+                menuEmpleados()
             elif opcion == 4: 
                 pedido.menu()
             elif opcion == 5:
