@@ -12,3 +12,9 @@ def getAllNombre():
      for val in getAllGama():
          GamaNombre.append(val.get('gama'))
      return GamaNombre
+
+def getAllProductoGama(gama):
+    for val in getAllGama():
+        if val.get('gama') == gama:
+            return [val]
+    
