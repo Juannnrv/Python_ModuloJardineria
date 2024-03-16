@@ -17,7 +17,7 @@ def postProducto():
                     data = gP.getProductoCodigo(codigo)
                     if(data):
                         print(tabulate(data, headers='keys', tablefmt='fancy grid'))
-                        raise Exception('El código no cumple con los estándar establecido')
+                        raise Exception('El código no cumple con los estandares establecidos')
                     else:
                         producto['codigo_producto'] = codigo
                 else:
@@ -29,14 +29,16 @@ def postProducto():
                     producto['nombre'] = nombre
             
             if(not producto.get('gama')):
-                 gama = input('Ingrese la gama del producto => ')
-                 if(re.match(r'^[A-Z]{2}-[0-9]{3}$', gama) is not None):
+                gama = input('Ingrese la gama del producto => ')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', gama) is not None):
                      data = gG.getAllProductoGama(gama)
                      if(data):
                          print(tabulate(data, headers='keys', tablefmt='fancy grid'))
-                         raise Exception('El código no cumple con los estandares establecidos')
+                         raise Exception('La gama no cumple con los estandares establecidos')
                      else:
                          producto['gama'] = gama
+                else:
+                    raise Exception('--> La gama no cumple con el estándar establecido')
                     
             if(not producto.get('dimensiones')):
                 dimensiones = input('Ingrese las dimensiones del producto => ')
@@ -67,9 +69,10 @@ def postProducto():
                 precio_proveedor = (input('Ingrese el precio de venta del producto'))
                 if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_proveedor) is not None):
                     producto['precio_proveedor'] = precio_proveedor
+                    break 
 
             else:
-                raise Exception('El nombre del producto no cumple con el estándar establecido')
+                raise Exception('No cumple con los estandares establecidos')
             
         except Exception as error:
             print('---ERROR---')
