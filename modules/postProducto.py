@@ -57,17 +57,20 @@ def postProducto():
 
             if(not producto.get('cantidad_en_stock')):
                 cantidad_en_stock = (input('Ingrese la cantidad de stock'))
-                if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', cantidad_en_stock) is not None):
+                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', cantidad_en_stock) is not None):
+                    cantidad_en_stock = int(cantidad_en_stock)
                     producto['cantidad_en_stock'] = cantidad_en_stock  
 
             if(not producto.get('precio_venta')):
                 precio_venta = (input('Ingrese el precio de venta del producto'))
-                if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_venta) is not None):
+                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_venta) is not None):
+                    precio_venta = int(precio_venta)
                     producto['precio_venta'] = precio_venta
 
             if(not producto.get('precio_proveedor')):
                 precio_proveedor = (input('Ingrese el precio de venta del producto'))
-                if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_proveedor) is not None):
+                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_proveedor) is not None):
+                    precio_proveedor = int(precio_proveedor)
                     producto['precio_proveedor'] = precio_proveedor
                     break 
 
