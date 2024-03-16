@@ -3,6 +3,7 @@ import requests
 import os
 import re
 import modules.getProducto as gP
+import modules.getGamas as gG
 from tabulate import tabulate
 
 def postProducto():
@@ -28,13 +29,47 @@ def postProducto():
                     producto['nombre'] = nombre
             
             if(not producto.get('gama')):
-                nombre = input('Ingrese la gama del producto => ')
-                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', nombre) is not None):
-                    producto['gama'] = gama
+                 gama = input('Ingrese la gama del producto => ')
+                 if(re.match(r'^[A-Z]{2}-[0-9]{3}$', gama) is not None):
+                     data = gG.getAllProductoGama(gama)
+                     if(data):
+                         print(tabulate(data, headers='keys', tablefmt='fancy grid'))
+                         raise Exception('El código no cumple con los estandares establecidos')
+                     else:
+                         producto['gama'] = gama
+                    
+            if(not producto.get('dimensiones')):
+                dimensiones = input('Ingrese las dimensiones del producto => ')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', dimensiones) is not None):
+                    producto['dimensiones'] = dimensiones
 
+            if (not producto.get('proveedor')):
+                proveedor = input('Ingrese los datos del proveedor => ')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', proveedor) is not None):
+                    producto['proveedor'] = proveedor
 
-                else:
-                    raise Exception('El nombre del producto no cumple con el estándar establecido')
+            if (not producto.get('descripcion')):
+                descripcion = input('Ingresa la descripcion del producto')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', dimensiones) is not None):
+                    producto['dimensiones'] = descripcion
+
+            if(not producto.get('cantidad_en_stock')):
+                cantidad_en_stock = (input('Ingrese la cantidad de stock'))
+                if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', cantidad_en_stock) is not None):
+                    producto['cantidad_en_stock'] = cantidad_en_stock  
+
+            if(not producto.get('precio_venta')):
+                precio_venta = (input('Ingrese el precio de venta del producto'))
+                if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_venta) is not None):
+                    producto['precio_venta'] = precio_venta
+
+            if(not producto.get('precio_proveedor')):
+                precio_proveedor = (input('Ingrese el precio de venta del producto'))
+                if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_proveedor) is not None):
+                    producto['precio_proveedor'] = precio_proveedor
+
+            else:
+                raise Exception('El nombre del producto no cumple con el estándar establecido')
             
         except Exception as error:
             print('---ERROR---')
