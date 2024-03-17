@@ -12,16 +12,17 @@ def postProducto():
     while True:
         try:
             if(not producto.get('codigo_producto')):
-                codigo = input('Ingrese el codigo del producto => ')
-                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', codigo) is not None):
-                    data = gP.getProductoCodigo(codigo)
-                    if(data):
-                        print(tabulate(data, headers='keys', tablefmt='fancy grid'))
-                        raise Exception('El código no cumple con los estandares establecidos')
+                while True:
+                    codigo = input('Ingrese el codigo del producto => ')
+                    if ((re.match(r'^[A-Z]{2}-[0-9]{3}$', codigo) is not None) or (codigo.isdigit())):
+                        data = gP.getProductoCodigo(codigo)
+                        if(data):
+                            raise Exception('El código del producto ya existe')
+                        else:
+                            producto['codigo_producto'] = codigo
                     else:
-                        producto['codigo_producto'] = codigo
-                else:
-                    raise Exception("--> El código no cumple con el estándar establecido")
+                        raise Exception("--> El código no cumple con el estándar establecido")
+                    break
                 
             if(not producto.get('nombre')):
                 nombre = input('Ingrese el nombre del producto => ')
@@ -31,14 +32,7 @@ def postProducto():
             if(not producto.get('gama')):
                 gama = input('Ingrese la gama del producto => ')
                 if(re.match(r'^[A-Z]{2}-[0-9]{3}$', gama) is not None):
-                     data = gG.getAllProductoGama(gama)
-                     if(data):
-                         print(tabulate(data, headers='keys', tablefmt='fancy grid'))
-                         raise Exception('La gama no cumple con los estandares establecidos')
-                     else:
                          producto['gama'] = gama
-                else:
-                    raise Exception('--> La gama no cumple con el estándar establecido')
                     
             if(not producto.get('dimensiones')):
                 dimensiones = input('Ingrese las dimensiones del producto => ')
