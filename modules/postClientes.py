@@ -13,16 +13,18 @@ def postClientes():
     while True:
         try:
            if(not cliente.get('codigo_cliente')):
-              codigo = input('Ingrese el código del cliente => ')
-              if str(re.match(r'^[A-Z]{2}-[0-9]{3}$', codigo) is not None):
-                data = gC.getAllClientsCodigo(codigo)
-                if (data):
-                     print(tabulate(data, headers='keys', tablefmt='fancy grid'))
-                     raise Exception('El código no cumple con los estandares establecidos')
-                else:
-                    cliente['codigo_cliente'] = codigo
-              else:
-                  raise Exception("--> El código no cumple con el estándar establecido")
+                while True:
+                    codigo = input('Ingrese el codigo del cliente => ')
+                    if (codigo.isdigit()):
+                        data = gC.getAllClientsCodigo(codigo)
+                        if(data):
+                            raise Exception('El código del cliente ya existe')
+                        else:
+                            cliente['codigo_cliente'] = codigo
+                    else:
+                        raise Exception("--> El código no cumple con el estándar establecido")
+                    break
+
 
            if(not cliente.get('nombre_cliente')):
                 nombre = input('Ingrese el nombre del cliente => ')
@@ -72,30 +74,35 @@ def postClientes():
            if(not cliente.get('pais')):
                 pais = input('Ingrese el país del cliente => ')
                 if(re.match(r'^[A-Z]{2}-[0-9]{3}$', pais) is not None):
-                    cliente['pais'] = pais     
+                    cliente['pais'] = pais
 
+           if(not cliente.get('codigo_postal')):
+                codigo_postal = input('Ingrese el código postal del cliente => ')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', codigo_postal) is not None):
+                    cliente['codigo_postal'] = codigo_postal 
 
+           if(not cliente.get('codigo_empleado_rep_ventas')):
+                codigo_empleado_rep_ventas = input('Ingrese el código del representante de ventas asignado al cliente => ')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', codigo_empleado_rep_ventas) is not None):
+                    codigo_empleado_rep_ventas = int(codigo_empleado_rep_ventas)
+                    cliente['codigo_empleado_rep_ventas'] = codigo_empleado_rep_ventas
 
-                              
-        
-    cliente = {
-        'codigo_producto': int(input('Ingrese el código del producto => ')),
-        'nombre_cliente': input('Ingrese el nombre del cliente => '),
-        'nombre_contacto': input('Ingrese el nombre del contacto => '),
-        'apellido_contacto': input('Ingrese el apellido del contacto => '),
-        'telefono': input('Ingrese el telefono => '),
-        'fax': input('Ingrese el fax => '),
-        'linea_direccion1': input('Ingrese la linea de direccion 1 => '),
-        'linea_direccion2': input('Ingrese la linea de direccion 2 => '),
-        'ciudad': input('Ingrese la ciudad => '),
-        'region': input('Ingrese la region => '),
-        'pais': input('Ingrese el pais => '),
-        'codigo_postal': input('Ingrese el codigo postal => '),
-        'codigo_empleado_rep_ventas': int(input('Ingresa el codigo del representante de ventas => ')),
-        'limite_credito': int(input('Ingrese el limite crediticio => '))
-    }
+           if(not cliente.get('limite_credito')):
+                limite_credito = input('Ingrese el límite crediticio del cliente => ')
+                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', limite_credito) is not None):
+                    limite_credito = int(limite_credito)
+                    cliente['limite_credito'] = limite_credito  
+                    break                                 
+           
+           else:
+                raise Exception('No cumple con los estandares establecidos')
+            
+        except Exception as error:
+            print('---ERROR---')
+            print(error)
+
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post('http://172.16.103.28:5503', headers=headers, data=json.dumps(cliente)) 
+    peticion = requests.post('http://192.168.1.7:5503', headers=headers, data=json.dumps(cliente)) 
     res = peticion.json()
     res ['Mensaje'] = 'Cliente Guardado'
     return [res]
