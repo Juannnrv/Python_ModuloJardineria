@@ -141,8 +141,7 @@ def getAllClientesNoPagos():
 
 def menu():
     while True:
-
-     print("""
+        print("""
         ---REPORTES DE LOS CLIENTES---
           
           1. Obtener todos los clientes (código y nombre)
@@ -155,33 +154,33 @@ def menu():
           8. Obtener el nombre de todos los clientes junto sus representantes de ventas que no hayan realizado pagos  
              
        Presiona (Ctrl + C) para regresar al menú principal
-    """)
-     try:
-      
-      opcion = int(input("\nSeleccione una de las opciones => "))
-      if opcion == 1:
-        print(tabulate(getAllClientsName(), headers = "keys", tablefmt= "fancy_grid"))
-      elif opcion == 2:
-       codigo = int(input("Ingrese el código del cliente => "))
-       cliente = getOneClientCodigo(codigo)
-       if cliente:
-          print(tabulate([cliente], headers="keys", tablefmt="fancy_grid"))
-      elif opcion == 3:
-        limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar => "))
-        ciudad = input("Ingrese su limite crediticio y el nombre de la ciudad que desea filtrar => ")
-        print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers = "keys", tablefmt= "fancy_grid"))
-      elif opcion == 4:
-        print(tabulate(getAllClientesEspañoles(), headers = 'keys', tablefmt = 'fancy_grid'))
-      elif opcion == 5:
-         print(tabulate(getAllMadridClients(), headers = 'keys', tablefmt = 'fancy_grid'))
-      elif opcion == 6:
-         print(tabulate(getAllRepVentasNombreApellido(), headers = 'keys', tablefmt = 'fancy_grid'))
-      elif opcion == 7:
-         print(tabulate(getAllPagosClientesPagos(), headers = 'keys', tablefmt = 'fancy_grid'))
-      elif opcion == 8:
-         print(tabulate(getAllClientesNoPagos(), headers = 'keys', tablefmt = 'fancy_grid'))      
-     except KeyboardInterrupt:
-         print()
-         print()
-         print('SALIENDO...')
-         break
+        """)
+        try:
+            opcion = int(input("\nSeleccione una de las opciones => "))
+            if opcion == 1:
+                print(tabulate(getAllClientsName(), headers="keys", tablefmt="fancy_grid"))
+            elif opcion == 2:
+                codigo = int(input("Ingrese el código del cliente => "))
+                cliente = getOneClientCodigo(codigo)
+                if cliente:
+                    print(tabulate([cliente], headers="keys", tablefmt="fancy_grid"))
+            elif opcion == 3:
+                limite = float(input("Ingrese el limite de credito de los clientes que desea visualizar => "))
+                ciudad = input("Ingrese su limite crediticio y el nombre de la ciudad que desea filtrar => ")
+                print(tabulate(getAllClientCreditCiudad(limite, ciudad), headers="keys", tablefmt="fancy_grid"))
+            elif opcion == 4:
+                print(tabulate(getAllClientesEspañoles(), headers='keys', tablefmt='fancy_grid'))
+            elif opcion == 5:
+                print(tabulate(getAllMadridClients(), headers='keys', tablefmt='fancy_grid'))
+            elif opcion == 6:
+                print(tabulate(getAllRepVentasNombreApellido(), headers='keys', tablefmt='fancy_grid'))
+            elif opcion == 7:
+                print(tabulate(getAllPagosClientesPagos(), headers='keys', tablefmt='fancy_grid'))
+            elif opcion == 8:
+                print(tabulate(getAllClientesNoPagos(), headers='keys', tablefmt='fancy_grid'))      
+
+            continuar = input("\n¿Desea continuar? Presione cualquier tecla para continuar o Ctrl + C para regresar al menú principal.")
+        except KeyboardInterrupt:
+            print()
+            print('SALIENDO...')
+            break
