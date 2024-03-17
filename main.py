@@ -5,7 +5,6 @@ from tabulate import tabulate
 
 import modules.getClientes as Repclientes
 import modules.postClientes as CRUDclientes
-from modules import postClientes
 
 import modules.getOficina as Repoficina
 import modules.postOficinas as CRUDoficina
