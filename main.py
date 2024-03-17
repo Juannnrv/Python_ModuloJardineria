@@ -7,18 +7,18 @@ import modules.getClientes as Repclientes
 import modules.postClientes as CRUDclientes
 
 import modules.getOficina as Repoficina
-import modules.postOficinas as CRUDoficina
-from modules import postOficinas
+import modules.getOficina as CRUDoficina
 
 import modules.getEmpleados as Repempleado
 import modules.postEmpleados as CRUDempleados
-from modules import postEmpleados
+
 import modules.getPedidos as pedido
+
 import modules.getPagos as pagos
 
 import modules.getProducto as Repproducto
 import modules.postProducto as CRUDproducto
-from modules import postProducto
+
 
 def menuClientes():
     while True:
