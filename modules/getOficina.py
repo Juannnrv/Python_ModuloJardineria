@@ -3,10 +3,15 @@ from tabulate import tabulate
 import os
 
 def getAllDataOficina():
-   #json-server storage/oficina.json -b 5007
-   peticion = requests.get("http://172.16.100.116:5504")
+   #json-server storage/oficina.json -b 5003
+   peticion = requests.get("http://192.168.1.7:5502")
    data = peticion.json()
    return data
+
+def getOficinaCodigo(codigo):
+   for val in getAllDataOficina():
+      if(val.get('codigo_oficina')) == codigo:
+         return [val]
 
 def getAllCodigoCiudad():
     codigoCiudad = []

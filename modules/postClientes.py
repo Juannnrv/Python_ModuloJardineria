@@ -7,7 +7,7 @@ from tabulate import tabulate
 
 
 def postClientes():
-    #json-server storage/cliente.json -b 5503
+    #json-server storage/cliente.json -b 5501
 
     cliente = dict()
     while True:
@@ -102,7 +102,7 @@ def postClientes():
             print(error)
 
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post('http://192.168.1.7:5503', headers=headers, data=json.dumps(cliente)) 
+    peticion = requests.post('http://192.168.1.7:5501', headers=headers, data=json.dumps(cliente)) 
     res = peticion.json()
     res ['Mensaje'] = 'Cliente Guardado'
     return [res]

@@ -3,11 +3,10 @@ import requests
 import os
 import re
 import modules.getProducto as gP
-import modules.getGamas as gG
 from tabulate import tabulate
 
 def postProducto():
-    #json-server storage/producto.json -b 5502
+    #json-server storage/producto.json -b 5506
     producto = dict()
     while True:
         try:
@@ -76,7 +75,7 @@ def postProducto():
             print(error)
         
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post("http://172.16.103.28:5502", headers=headers, data=json.dumps(producto))
+    peticion = requests.post("http://192.168.1.7:5506", headers=headers, data=json.dumps(producto))
     res = peticion.json()
     res ['Mensaje'] = 'Producto Guardado'
     return [res]

@@ -3,8 +3,8 @@ from tabulate import tabulate
 import os
 
 def getAllDataProduct():
-   #json-server storage/producto.json -b 5502
-   peticion = requests.get("http://192.168.1.7:5502")
+   #json-server storage/producto.json -b 5506
+   peticion = requests.get("http://192.168.1.7:5506")
    data = peticion.json()
    return data
 
