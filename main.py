@@ -7,7 +7,7 @@ import modules.getClientes as Repclientes
 import modules.postClientes as CRUDclientes
 
 import modules.getOficina as Repoficina
-import modules.getOficina as CRUDoficina
+import modules.postOficinas as CRUDoficina
 
 import modules.getEmpleados as Repempleado
 import modules.postEmpleados as CRUDempleados
