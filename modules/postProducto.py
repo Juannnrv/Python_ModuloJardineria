@@ -72,10 +72,33 @@ def postProducto():
             print(error)
         
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post("http://192.168.1.7:5506", headers=headers, data=json.dumps(producto))
+    peticion = requests.post("http://172.16.100.116:5506", headers=headers, data=json.dumps(producto))
     res = peticion.json()
     res ['Mensaje'] = 'Producto Guardado'
     return [res]
+
+def deleteProducto(id):
+    data = gP.getProductoCodigo(id)
+    if len(data) > 0: 
+        peticion = requests.delete(f'http://172.16.100.116:5506/productos/{id}')
+        if peticion.status_code == 204:
+            return {
+                'body': [{'Mensaje': 'Producto eliminado satisfactoriamente'}],
+                'status': peticion.status_code,
+            }
+        else:
+            return {
+                'body': [{'Mensaje': 'Error al eliminar el producto'}],
+                'status': peticion.status_code,
+            }
+    else:
+        return {
+            'body': [{'Mensaje': 'Producto no encontrado', 'id': id}],
+            'status': 404,
+        }
+
+
+
 
 def menu():
     while True:
@@ -84,6 +107,7 @@ def menu():
                ---ADMINISTRADOR DATOS DE PRODUCTOS---
           
                     1. Guardar un producto nuevo
+                    2. Eliminar un producto 
          
           Presiona (Ctrl + C) para regresar al menú principal
            
@@ -91,11 +115,18 @@ def menu():
      try:
         
         opcion = int(input('\nSeleccione una de las opciones => '))
+
         if opcion == 1:
-           print(postProducto())
-           input('Por favor presione una tecla para continuar... ')
+           print(tabulate(postProducto(), headers='keys', tablefmt='fancy grid'))
+
+        elif opcion == 2:
+           idProducto = input('Ingrese el id del producto que desea eliminar => ')
+           print(tabulate(deleteProducto(idProducto)['body'], headers='keys', tablefmt='fancy grid'))
+
      except KeyboardInterrupt:
         print()
         print()
         print('SALIENDO...')
         break 
+     
+    input('Presione una tecla para continuar...')
