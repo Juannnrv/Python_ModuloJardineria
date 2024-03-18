@@ -152,11 +152,10 @@ if __name__ == "__main__":
               
                  Presiona (Ctrl + C) para Salir
 ''')
-        try:
-            opcion = (input('\n Seleccione una de las opciones => '))
-            if(re.match(r'[0-9]+$', opcion) is not None):
-                 opcion = int(opcion)
-                 if (opcion>=0 and opcion<=7):
+        opcion = (input('\n Seleccione una de las opciones => '))
+        if(re.match(r'[0-9]+$', opcion) is not None):
+            opcion = int(opcion)
+            if (opcion>=0 and opcion<=7):
                     if opcion == 1:
                         menuClientes()
                     elif opcion == 2:
@@ -169,10 +168,11 @@ if __name__ == "__main__":
                         pagos.menu()
                     elif opcion == 6:
                         menuProducto()
-                    elif opcion == 7:
-                        #Repgamas.menu()    #Falta crear el menú
-        except KeyboardInterrupt:
-            print('SALIENDO...')
-            break
+                    #elif opcion == 7:
+                        #gamas.menu()
+                    elif opcion == 0:
+                        break
+                    print('SALIENDO...')
+                    
 
      
