@@ -1,5 +1,6 @@
 import os
 import re
+import json
 from tabulate import tabulate
 
 
@@ -18,6 +19,8 @@ import modules.getPagos as pagos
 
 import modules.getProducto as Repproducto
 import modules.postProducto as CRUDproducto
+
+import modules.getGamas as Repgamas
 
 
 def menuClientes():
@@ -125,6 +128,15 @@ def menuProducto():
             
             
 if __name__ == "__main__":
+
+    #with open('storage/producto.json', 'r') as f:
+    #    fichero = f.read()
+    #    data = json.loads(fichero)
+    #    for i,val in enumerate(data):
+    #        data[i]['id'] = (i+1)
+    #    print(data)
+    #    f.close()    
+
     while True:
         os.system('clear')
         print(''' 
@@ -136,6 +148,7 @@ if __name__ == "__main__":
                         4. Pedidos
                         5. Pagos
                         6. Productos
+                        7. Gama    
               
                  Presiona (Ctrl + C) para Salir
 ''')
@@ -156,6 +169,8 @@ if __name__ == "__main__":
                         pagos.menu()
                     elif opcion == 6:
                         menuProducto()
+                    elif opcion == 7:
+                        #Repgamas.menu()    #Falta crear el menú
         except KeyboardInterrupt:
             print('SALIENDO...')
             break
