@@ -7,7 +7,7 @@ from tabulate import tabulate
 
 
 def postOficina():
-    # json-server storage/oficina.json -b 5007
+    # json-server storage/oficina.json -b 5502
     
     oficina = dict()
     while True:
@@ -23,7 +23,7 @@ def postOficina():
                             oficina['codigo_oficina'] = codigo
                     else:
                         raise Exception('El código no cumple con el estándar establecido')
-                    break    
+                    break  
 
             if not oficina.get('ciudad'):
                 ciudad = input('Ingrese la ciudad de la oficina => ')
@@ -59,16 +59,22 @@ def postOficina():
                 linea_direccion2 = input('Ingrese la dirección 2 de la oficina => ')
                 if re.match(r'^[^\n]+$', linea_direccion2):
                     oficina['linea_direccion2'] = linea_direccion2
+                    break
+                
+            else:
+                raise Exception('No cumple con los estandares establecidos')
+            
 
         except Exception as error:
             print('---ERROR---')
             print(error)
             
-        headers = {'Content-Type': 'application/json', 'charser': 'UTF-8'}
-        peticion = requests.post('http://192.168.1.7:5502', headers=headers, data=json.dumps(oficina))
-        res = peticion.json()
-        res ['Mensaje'] = 'Oficina Guardada'
-        return [res]
+            
+    # headers = {'Content-Type': 'application/json', 'charser': 'UTF-8'}
+    # peticion = requests.post('http://192.168.1.7:5502', headers=headers, data=json.dumps(oficina))
+    # res = peticion.json()
+    # res ['Mensaje'] = 'Oficina Guardada'
+    # return [res]
 
 
 def menu():
@@ -83,9 +89,10 @@ def menu():
            
            """)
         try:
-            opcion = input('\nSeleccione una de las opciones => ')
+            opcion = int(input('\nSeleccione una de las opciones => '))
             if opcion == 1:
-                print(tabulate(postOficina(), headers='keys', tablefmt='fancy grid'))
+               print(postOficina())
+            #    input('Por favor presione una tecla para continuar... ')
         except KeyboardInterrupt:
             print()
             print()

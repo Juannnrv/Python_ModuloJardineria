@@ -3,7 +3,7 @@ from tabulate import tabulate
 import os
 
 def getAllDataOficina():
-   #json-server storage/oficina.json -b 5003
+   #json-server storage/oficina.json -b 5502
    peticion = requests.get("http://192.168.1.7:5502")
    data = peticion.json()
    return data
