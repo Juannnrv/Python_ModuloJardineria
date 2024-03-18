@@ -31,7 +31,7 @@ def postProducto():
             if(not producto.get('gama')):
                 gama = input('Ingrese la gama del producto => ')
                 if(re.match(r'^[A-Z]{2}-[0-9]{3}$', gama) is not None):
-                         producto['gama'] = gama
+                    producto['gama'] = gama
                     
             if(not producto.get('dimensiones')):
                 dimensiones = input('Ingrese las dimensiones del producto => ')
@@ -95,7 +95,6 @@ def menu():
         
         opcion = int(input('\nSeleccione una de las opciones => '))
         if opcion == 1:
-        #    
            print(postProducto())
            input('Por favor presione una tecla para continuar... ')
      except KeyboardInterrupt:
