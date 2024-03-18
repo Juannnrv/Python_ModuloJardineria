@@ -25,45 +25,42 @@ def postProducto():
                 
             if(not producto.get('nombre')):
                 nombre = input('Ingrese el nombre del producto => ')
-                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', nombre) is not None):
+                if(re.match(r'^[A-Za-z\s]+$', nombre)):
                     producto['nombre'] = nombre
             
             if(not producto.get('gama')):
                 gama = input('Ingrese la gama del producto => ')
-                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', gama) is not None):
+                if(re.match(r'^[A-Za-z]+$', gama) is not None):
                     producto['gama'] = gama
                     
             if(not producto.get('dimensiones')):
                 dimensiones = input('Ingrese las dimensiones del producto => ')
-                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', dimensiones) is not None):
+                if(re.match(r'^[0-9]{1,3}-[0-9]{1,3}$', dimensiones) is not None):
                     producto['dimensiones'] = dimensiones
 
             if (not producto.get('proveedor')):
                 proveedor = input('Ingrese los datos del proveedor => ')
-                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', proveedor) is not None):
+                if(re.match(r'^[A-Za-z\s]+$', proveedor) is not None):
                     producto['proveedor'] = proveedor
 
             if (not producto.get('descripcion')):
                 descripcion = input('Ingresa la descripcion del producto')
-                if(re.match(r'^[A-Z]{2}-[0-9]{3}$', dimensiones) is not None):
+                if(re.match(r'^[^\n]+$', dimensiones) is not None):
                     producto['dimensiones'] = descripcion
 
             if(not producto.get('cantidad_en_stock')):
                 cantidad_en_stock = (input('Ingrese la cantidad de stock'))
-                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', cantidad_en_stock) is not None):
-                    cantidad_en_stock = int(cantidad_en_stock)
+                if cantidad_en_stock.isdigit():
                     producto['cantidad_en_stock'] = cantidad_en_stock  
 
             if(not producto.get('precio_venta')):
                 precio_venta = (input('Ingrese el precio de venta del producto'))
-                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_venta) is not None):
-                    precio_venta = int(precio_venta)
+                if precio_venta.isdigit():
                     producto['precio_venta'] = precio_venta
 
             if(not producto.get('precio_proveedor')):
                 precio_proveedor = (input('Ingrese el precio de venta del producto'))
-                if (re.match(r'^[A-Z]{2}-[0-9]{3}$', precio_proveedor) is not None):
-                    precio_proveedor = int(precio_proveedor)
+                if precio_proveedor.isdigit():
                     producto['precio_proveedor'] = precio_proveedor
                     break 
 
