@@ -2,7 +2,7 @@ from tabulate import tabulate
 import requests
 
 def getAllDataEmpleados():
-   #json-server storage/empleado.json -b 5006
+   #json-server storage/empleado.json -b 5503
    peticion = requests.get('http://172.16.106.67:5006')
    data = peticion.json()
    return data

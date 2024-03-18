@@ -4,7 +4,7 @@ import os
 from tabulate import tabulate 
 
 def postEmpleados():
-
+    #json-server storage/empleado.json -b 5503
     Empleado = {
 
         "codigo_empleado": int(input('Ingrese el codigo del empleado => ')),
