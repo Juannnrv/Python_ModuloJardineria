@@ -45,7 +45,7 @@ def postProducto():
 
             if (not producto.get('descripcion')):
                 descripcion = input('Ingresa la descripcion del producto')
-                if(re.match(r'^[^\n]+$', dimensiones) is not None):
+                if(re.match(r'^[^\n]+$', descripcion) is not None):
                     producto['dimensiones'] = descripcion
 
             if(not producto.get('cantidad_en_stock')):
@@ -59,7 +59,7 @@ def postProducto():
                     producto['precio_venta'] = precio_venta
 
             if(not producto.get('precio_proveedor')):
-                precio_proveedor = (input('Ingrese el precio de venta del producto'))
+                precio_proveedor = (input('Ingrese el precio del proveedor del producto'))
                 if precio_proveedor.isdigit():
                     producto['precio_proveedor'] = precio_proveedor
                     break 
