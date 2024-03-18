@@ -39,27 +39,27 @@ def postProducto():
                     producto['dimensiones'] = dimensiones
 
             if (not producto.get('proveedor')):
-                proveedor = input('Ingrese los datos del proveedor => ')
+                proveedor = input('Ingrese el nombre del proveedor => ')
                 if(re.match(r'^[A-Za-z\s]+$', proveedor) is not None):
                     producto['proveedor'] = proveedor
 
             if (not producto.get('descripcion')):
-                descripcion = input('Ingresa la descripcion del producto')
+                descripcion = input('Ingresa la descripcion del producto => ')
                 if(re.match(r'^[^\n]+$', descripcion) is not None):
                     producto['dimensiones'] = descripcion
 
             if(not producto.get('cantidad_en_stock')):
-                cantidad_en_stock = (input('Ingrese la cantidad de stock'))
+                cantidad_en_stock = (input('Ingrese la cantidad en stock => '))
                 if cantidad_en_stock.isdigit():
                     producto['cantidad_en_stock'] = cantidad_en_stock  
 
             if(not producto.get('precio_venta')):
-                precio_venta = (input('Ingrese el precio de venta del producto'))
+                precio_venta = (input('Ingrese el precio de venta del producto => '))
                 if precio_venta.isdigit():
                     producto['precio_venta'] = precio_venta
 
             if(not producto.get('precio_proveedor')):
-                precio_proveedor = (input('Ingrese el precio del proveedor del producto'))
+                precio_proveedor = (input('Ingrese el precio del producto asignado por el proveedor => '))
                 if precio_proveedor.isdigit():
                     producto['precio_proveedor'] = precio_proveedor
                     break 
@@ -72,7 +72,7 @@ def postProducto():
             print(error)
         
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post("http://172.16.100.116:5506", headers=headers, data=json.dumps(producto))
+    peticion = requests.post("http://172.16.106.40:5506/productos", headers=headers, data=json.dumps(producto))
     res = peticion.json()
     res ['Mensaje'] = 'Producto Guardado'
     return [res]
@@ -80,7 +80,7 @@ def postProducto():
 def deleteProducto(id):
     data = gP.getProductoCodigo(id)
     if len(data) > 0: 
-        peticion = requests.delete(f'http://172.16.100.116:5506/productos/{id}')
+        peticion = requests.delete(f'http://172.16.106.40:5506/productos/{id}')
         if peticion.status_code == 204:
             return {
                 'body': [{'Mensaje': 'Producto eliminado satisfactoriamente'}],
@@ -96,6 +96,15 @@ def deleteProducto(id):
             'body': [{'Mensaje': 'Producto no encontrado', 'id': id}],
             'status': 404,
         }
+
+def updateProducto(id):
+    data = gP.getProductoCodigo(id)
+    if len(data) > 0:
+
+        
+        peticion = requests.put(f'http://172.16.106.40:5506/productos/{id}')
+        if peticion.status_code == 200:
+
 
 
 

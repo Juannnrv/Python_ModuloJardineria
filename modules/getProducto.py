@@ -4,12 +4,12 @@ import os
 
 def getAllDataProduct():
    #json-server storage/producto.json -b 5506
-   peticion = requests.get("http://172.16.100.116:5506/producto")
+   peticion = requests.get("http://172.16.106.40:5506/producto")
    data = peticion.json()
    return data
 
 def getProductoCodigo(codigo):
-   peticion = requests.get(f"http://172.16.100.116:5506/producto/{codigo}")
+   peticion = requests.get(f"http://172.16.106.40:5506/productos/{codigo}")
    if(peticion.ok):
       return [peticion.json()]
    else:
@@ -41,11 +41,11 @@ def menu():
          
                           Presiona (Ctrl + C) para regresar al menú principal
 """)
+     opcion = int(input('Seleccione una de las opciones => '))
      try:
-
-      opcion = int(input('Seleccione una de las opciones => '))
-      if opcion == 1:
-       print(tabulate(getAllStocksPriceGama(), headers = "keys", tablefmt= "fancy_grid"))
+      
+        if opcion == 1:
+         print(tabulate(getAllStocksPriceGama(), headers = "keys", tablefmt= "fancy_grid"))
 
      except KeyboardInterrupt:
          print()
