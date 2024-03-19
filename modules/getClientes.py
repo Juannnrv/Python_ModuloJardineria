@@ -1,6 +1,7 @@
 import modules.getEmpleados as em 
 import modules.getPagos as pago
 import requests
+import os
 
 from tabulate import tabulate
 
@@ -139,7 +140,9 @@ def getAllClientesNoPagos():
 
 
 def menu():
+    
     while True:
+        os.system('clear')
         print("""
         ---REPORTES DE LOS CLIENTES---
           
@@ -178,7 +181,7 @@ def menu():
             elif opcion == 8:
                 print(tabulate(getAllClientesNoPagos(), headers='keys', tablefmt='fancy_grid'))      
 
-            continuar = input("\n¿Desea continuar? Presione cualquier tecla para continuar o Ctrl + C para regresar al menú principal.")
+            continuar = input("\n¿Desea continuar? Presione Enter.")
         except KeyboardInterrupt:
             print()
             print('SALIENDO...')
