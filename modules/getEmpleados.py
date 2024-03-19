@@ -1,11 +1,29 @@
 from tabulate import tabulate
 import requests
+import os
 
 def getAllEmpleados():
    # http://154.38.171.54:5003/empleados
    peticion = requests.get('http://154.38.171.54:5003/empleados')
    data = peticion.json()
    return data
+
+def geAllId(codigo):
+   peticion = requests.get(f'http://154.38.171.54:5003/empleados{codigo}')
+   if peticion.ok:
+      return [peticion.json()]
+   else:
+      return []
+
+def getAllCodigoEmpleados(codigo):
+   for val in getAllEmpleados():
+      if(val.get('codigo_empleado')) == codigo:
+         return [val]
+      
+def getAllPuesto(puesto):
+   for val in getAllEmpleados():
+      if(val.get('puesto')) == puesto:
+         return [val]
 
 def getAllNombreApellidoEmailJefe():
     nombreApellidoEmail = []
@@ -26,7 +44,7 @@ def getAllNombrePuestoApellidoEmailJefe():
     nombrePuestoApellidoEmail = []
     
     for val in getAllEmpleados():
-        if ( val.get ('codigo_jefe') == 7):
+        if val.get('codigo_jefe') == 7:
             nombrePuestoApellidoEmail.append({
 
                 'nombre': val.get('nombre'),
@@ -55,6 +73,7 @@ def getAllNombreApellidosPuestoNoRepresentantesDeVentas():
 
 
 def menu():
+    os.system('clear')
     while True:
 
      print("""
