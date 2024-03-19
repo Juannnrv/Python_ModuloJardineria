@@ -4,12 +4,12 @@ import os
 
 def getAllDataProduct():
    #json-server storage/producto.json -b 5506
-   peticion = requests.get("http://172.16.106.40:5506/producto")
+   peticion = requests.get("http://192.168.1.10:5506/producto")
    data = peticion.json()
    return data
 
 def getProductoCodigo(codigo):
-   peticion = requests.get(f"http://172.16.106.40:5506/productos/{codigo}")
+   peticion = requests.get(f"http://192.168.1.10:5506/productos/{codigo}")
    if(peticion.ok):
       return [peticion.json()]
    else:
