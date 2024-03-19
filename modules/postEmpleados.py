@@ -4,7 +4,7 @@ import os
 from tabulate import tabulate 
 
 def postEmpleados():
-    #json-server storage/empleado.json -b 5503
+    # http://154.38.171.54:5003/empleados
     Empleado = {
 
         "codigo_empleado": int(input('Ingrese el codigo del empleado => ')),
@@ -19,7 +19,7 @@ def postEmpleados():
     }
 
     headers = {'Content Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post('http://172.16.106.67:5006', headers=headers, data=json.dumps(Empleado))
+    peticion = requests.post('http://154.38.171.54:5003/empleados', headers=headers, data=json.dumps(Empleado))
     res = peticion.json()
     res ['Mensaje'] = 'Cliente Guardado'
     return [res]

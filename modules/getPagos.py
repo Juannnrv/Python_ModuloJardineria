@@ -1,12 +1,20 @@
-import storage.pago as pago
 from datetime import datetime
+import requests
 from tabulate import tabulate
+
+
+def getAllPagos():
+   Pagos = []
+   peticion = requests.get('http://154.38.171.54:5006/pagos')
+   data = peticion.json()
+   return data
+
 
 def getAllClientesPagos2008():
     codigos_clientes_vistos = set() 
     pagos_2008 = []
 
-    for val in pago.pago:
+    for val in getAllPagos():
         codigo_cliente = val.get('codigo_cliente')
         if val.get('fecha_pago').startswith('2008') and codigo_cliente not in codigos_clientes_vistos:
             pagos_2008.append({
@@ -22,7 +30,7 @@ def getAllClientesPagos2008():
 def getAllPedidos2008ConPaypal():
     pedidos2008Paypal = []
 
-    for val in pago.pago:
+    for val in getAllPagos():
         fecha_pago = val.get('fecha_pago')
         forma_pago = val.get('forma_pago')
         if fecha_pago is not None:
@@ -44,7 +52,7 @@ def getAllFormasDePago():
     FormasDePagoRepetidas = set()
     FormasDePago = []
 
-    for val in pago.pago:
+    for val in getAllPagos():
         forma_pago = val.get ('forma_pago')
         if (val.get ('forma_pago')) is not None and forma_pago not in FormasDePagoRepetidas:
             FormasDePago.append({

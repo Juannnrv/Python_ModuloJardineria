@@ -1,12 +1,20 @@
-import storage.pedido as ped
 from datetime import datetime
 from tabulate import tabulate
+import requests
+
+
+def getAllPedidos():
+    # http://154.38.171.54:5007/pedidos
+   peticion = requests.get('http://154.38.171.54:5007/pedidos')
+   data = peticion.json()
+   return data
+
 
 def getAllEstadosPedidos():
     EstadosRepetidos = set()
     EstadosPedido = []
 
-    for val in ped.pedido:
+    for val in getAllPedidos():
         if val.get('estado') not in EstadosRepetidos:   
          EstadosPedido.append({
 
@@ -20,7 +28,7 @@ def getAllEstadosPedidos():
 def getAllPedidosAtrasadosDeTiempo():
     PedidosAceptados = []
 
-    for val in ped.pedido:
+    for val in getAllPedidos():
         if (val.get('estado') == 'Entregado') and val.get('fecha_entrega') is None:
             val['fecha_entrega'] = val.get('fecha_esperada')
         if val.get('estado') == 'Entregado':
@@ -44,7 +52,7 @@ def getAllPedidosAtrasadosDeTiempo():
 def getAllPedidosEntregados2DiasAntes():
     PedidosEntregados2DiasAntes = []
 
-    for val in ped.pedido:
+    for val in getAllPedidos():
         if (val.get('estado') == 'Entregado') and val.get('fecha_entrega') is None:
             val['fecha_entrega'] = val.get('fecha_esperada')
         
@@ -67,7 +75,7 @@ def getAllPedidosEntregados2DiasAntes():
 def getAllPedidosRechazados2009():
     PedidosRechazados2009 = []
 
-    for val in ped.pedido:
+    for val in getAllPedidos():
         codigo_pedido = val.get('codigo_pedido')
         fecha_entrega = val.get('fecha_entrega')
         if fecha_entrega is not None and fecha_entrega.startswith("2009") and val.get('estado') == "Rechazado":
@@ -82,7 +90,7 @@ def getAllPedidosRechazados2009():
 def getPedidosEntregadosEnEnero():
     pedidos_entregados_en_enero = []
 
-    for pedido in ped.pedido:
+    for pedido in getAllPedidos():
         fecha_entrega = pedido.get('fecha_entrega')
         if fecha_entrega is not None:
             fecha_entrega_dt = datetime.strptime(fecha_entrega, '%Y-%m-%d')

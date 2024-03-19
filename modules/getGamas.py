@@ -2,8 +2,8 @@ import json
 import requests
 
 def getAllGama():
-    #json-server storage/gama_producto.json -b 5503
-    peticion = requests.get("http://172.16.100.116:5503")
+    # http://154.38.171.54:5004/gama
+    peticion = requests.get("http://154.38.171.54:5004/gama")
     data = peticion.json()
     return data
 

@@ -27,14 +27,14 @@ import modules.getGamas as Repgamas
 def menuClientes():
     while True:
         os.system('clear')
-        print(''' 
+        print('''
                     ---BIENVENIDO AL MENÚ DE CLIENTES---
-            
+
                 1. Reportes de los clientes
                 2. Guardar, Actualizar y Eliminar clientes
-              
+
                         Presiona (Ctrl + C) para Salir
-        ''')      
+        ''')
         try:
            opcion = (input("\nSelecione una de las opciones => "))
            if(re.match(r'\d+', opcion) is not None):
@@ -47,19 +47,19 @@ def menuClientes():
         except KeyboardInterrupt:
               print('SALIENDO...')
               break
-        
+
 def menuOficina():
     while True:
      os.system('clear')
-     print(""" 
+     print("""
                     ---BIENVENIDO AL MENÚ DE OFICINAS---
-            
+
                 1. Reportes de las oficinas
                 2. Guardar, Actualizar y Eliminar oficina
-              
+
                         Presiona (Ctrl + C) para Salir
 
-""")       
+""")
      try:
         opcion = (input('\nSelecciones una de las opciones => '))
         if(re.match(r'[0-9]+$', opcion) is not None):
@@ -73,21 +73,21 @@ def menuOficina():
         print()
         print()
         print('SALIENDO...')
-        break        
+        break
 
 
 def menuEmpleados():
     while True:
         os.system('clear')
-        print(""" 
+        print("""
                     ---BIENVENIDO AL MENÚ DE EMPLEADOS---
-            
+
                 1. Reportes de los empleados
                 2. Guardar, Actualizar y Eliminar empleados
-              
+
                         Presiona (Ctrl + C) para Salir
 
-""")        
+""")
         try:
             opcion = (input('\nSeleccione una de las opciones => '))
             if(re.match(r'[0-9]+$', opcion) is not None):
@@ -101,19 +101,19 @@ def menuEmpleados():
             print()
             print()
             print('SALIENDO...')
-            break            
+            break
 
 def menuProducto():
     while True:
         os.system('clear')
-        print(''' 
+        print('''
                     ---BIENVENIDO AL MENÚ DE PRODUCTOS---
-            
+
                 1. Reportes de los productos
                 2. Guardar, Actualizar y Eliminar productos
-              
+
                         Presiona (Ctrl + C) para Salir
-        ''')      
+        ''')
         try:
            opcion = (input("\nSelecione una de las opciones: "))
            if(re.match(r'[0-9]+$', opcion) is not None):
@@ -126,13 +126,13 @@ def menuProducto():
         except KeyboardInterrupt:
               print('SALIENDO...')
               break
-            
-            
+
+
 if __name__ == "__main__":
 
-    peticion = requests.get('http://154.38.171.54:5008/productos?gama=Ornamentales&cantidadEnStock_gte=100&_sort=-precio_venta')
-    data = json.dumps(peticion.json(), indent=4)
-    print(data)
+    #peticion = requests.get('http://154.38.171.54:5008/productos?gama=Ornamentales&cantidadEnStock_gte=100&_sort=-precio_venta')
+    #data = json.dumps(peticion.json(), indent=4)
+    #print(data)
 
 
     #with open('storage/producto.json', 'r') as f:
@@ -141,21 +141,21 @@ if __name__ == "__main__":
     #    for i,val in enumerate(data):
     #        data[i]['id'] = (i+1)
     #    print(data)
-    #    f.close()    
+    #    f.close()
 
     while True:
         os.system('clear')
-        print(''' 
+        print('''
                     ---MENÚ PRINCIPAL---
-            
+
                         1. Clientes
                         2. Oficinas
                         3. Empleados
                         4. Pedidos
                         5. Pagos
                         6. Productos
-                        7. Gama    
-              
+                        7. Gama
+
                  Presiona (Ctrl + C) para Salir
 ''')
         opcion = (input('\n Seleccione una de las opciones => '))
@@ -168,7 +168,7 @@ if __name__ == "__main__":
                         menuOficina()
                     elif opcion == 3:
                         menuEmpleados()
-                    elif opcion == 4: 
+                    elif opcion == 4:
                         pedido.menu()
                     elif opcion == 5:
                         pagos.menu()
@@ -179,6 +179,5 @@ if __name__ == "__main__":
                     elif opcion == 0:
                         break
                     print('SALIENDO...')
-                    
 
-     
+

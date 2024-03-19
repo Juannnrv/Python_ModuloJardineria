@@ -7,7 +7,7 @@ from tabulate import tabulate
 
 
 def postOficina():
-    # json-server storage/oficina.json -b 5502
+    # http://154.38.171.54:5005/oficinas
     
     oficina = dict()
     while True:
@@ -70,11 +70,11 @@ def postOficina():
             print(error)
             
             
-    # headers = {'Content-Type': 'application/json', 'charser': 'UTF-8'}
-    # peticion = requests.post('http://192.168.1.7:5502', headers=headers, data=json.dumps(oficina))
-    # res = peticion.json()
-    # res ['Mensaje'] = 'Oficina Guardada'
-    # return [res]
+    headers = {'Content-Type': 'application/json', 'charser': 'UTF-8'}
+    peticion = requests.post('http://154.38.171.54:5005/oficinas', headers=headers, data=json.dumps(oficina))
+    res = peticion.json()
+    res ['Mensaje'] = 'Oficina Guardada'
+    return [res]
 
 
 def menu():

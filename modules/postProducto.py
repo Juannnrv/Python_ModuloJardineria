@@ -6,7 +6,7 @@ import modules.getProducto as gP
 from tabulate import tabulate
 
 def postProducto():
-    #json-server storage/producto.json -b 5506
+    # http://154.38.171.54:5008/productos
     producto = dict()
     while True:
         try:
@@ -73,7 +73,7 @@ def postProducto():
             break
         
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
-    peticion = requests.post("http://192.168.1.10:5506/productos", headers=headers, data=json.dumps(producto))
+    peticion = requests.post("http://154.38.171.54:5008/productos", headers=headers, data=json.dumps(producto))
     res = peticion.json()
     res ['Mensaje'] = 'Producto Guardado'
     return [res]
@@ -81,7 +81,7 @@ def postProducto():
 def deleteProducto(id):
     data = gP.getProductoCodigo(id)
     if len(data) > 0: 
-        peticion = requests.delete(f'http://192.168.1.10:5506/productos/{id}')
+        peticion = requests.delete(f'http://154.38.171.54:5008/productos/{id}')
         if peticion.status_code == 204:
             return {
                 'body': [{'Mensaje': 'Producto eliminado satisfactoriamente'}],
@@ -168,7 +168,7 @@ def updateProducto(id):
         
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
     
-    peticion = requests.put(f'http://192.168.1.10:5506/productos/{id}', json=producto)
+    peticion = requests.put(f'http://154.38.171.54:5008/productos/{id}', json=producto)
     if peticion.status_code == 200:
         return {
                 'body': [{'Mensaje': 'Producto actualizado satisfactoriamente'}],
