@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import requests
 from tabulate import tabulate
 
 
@@ -128,6 +129,11 @@ def menuProducto():
             
             
 if __name__ == "__main__":
+
+    peticion = requests.get('http://154.38.171.54:5008/productos?gama=Ornamentales&cantidadEnStock_gte=100&_sort=-precio_venta')
+    data = json.dumps(peticion.json(), indent=4)
+    print(data)
+
 
     #with open('storage/producto.json', 'r') as f:
     #    fichero = f.read()
