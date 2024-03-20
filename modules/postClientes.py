@@ -5,7 +5,7 @@ import re
 import modules.getClientes as gC
 from tabulate import tabulate
 
- #  Falta delete y put
+#  Falta put
 
 def postClientes():
     # http://154.38.171.54:5001/cliente
@@ -91,6 +91,8 @@ def postClientes():
                 limite_credito = input('Ingrese el límite crediticio del cliente => ')
                 if re.match(r'^[0-9]+(\.[0-9]+)?$', limite_credito):
                     cliente['limite_credito'] = float(limite_credito)
+                    print('\nNuevo cliente guardado :)')
+
                     break                                 
            
            else:
@@ -106,13 +108,62 @@ def postClientes():
     res ['Mensaje'] = 'Cliente Guardado'
     return [res]
 
+def deleteClient(id):
+    peticion = requests.delete(f'http://154.38.171.54:5001/cliente/{id}')
+    if peticion.status_code == 200:
+        print('\nCliente eliminado satisfactoriamente')
+
+def updateClient(id):
+    data = gC.getAllId(id)
+    if len(data):
+        print("""
+                  ¿Qué dato deseas actualizar?
+
+              1. Código del cliente
+              2. Nombre del cliente
+              3. Nombre de contacto del cliente
+              4. Apellido de contacto del cliente
+              5. Telefono del cliente
+              6. Fax del cliente
+              7. Dirección 1 del cliente
+              8. Dirección 2 del cliente
+              9. Ciudad del cliente
+              10. Región del cliente
+              11. País del cliente
+              12. Código postal del cliente
+              13. Representante de ventas del cliente
+              14. Límite crediticio del cliente
+ """)
+
+    opcion = int(input('Ingresa la opción => '))
+    for val in data:
+        
+        if opcion == 1:
+            nuevoCodigo= input('Ingrese el nuevo código del cliente => ')
+            if nuevoCodigo.isdigit():
+                data = data[0]
+                data['codigo_cliente'] = nuevoCodigo 
+
+
+        peticion = requests.put(f"http://154.38.171.54:5001/cliente/{id}", data=json.dumps(data).encode("UTF-8"))
+        res = peticion.json()
+        return [res]
+
+
+
+  
+
+    
+
 def menu():
+    os.system('clear')
     while True:
-     os.system('clear')
      print("""
                ---ADMINISTRADOR DATOS DE CLIENTES---
           
                     1. Guardar un cliente nuevo
+                    2. Eliminar un cliente
+                    3. Actualizar un cliente existente
          
           Presiona (Ctrl + C) para regresar al menú principal
            
@@ -120,7 +171,14 @@ def menu():
      try:
         opcion = int(input('\nSeleccione una de las opciones => '))
         if opcion == 1:
-           print(tabulate(postClientes(), headers='keys', tablefmt='fancy grid'))
+            print(tabulate(postClientes(), headers='keys', tablefmt='fancy grid'))
+        if opcion == 2:
+            idCliente = input('Ingrese el ID del cliente que desea eliminar => ')
+            print(tabulate(deleteClient(idCliente) , headers='keys', tablefmt='fancy grid'))
+        if opcion == 3:
+            idC = input('Ingresa el ID del cliente que deseas actualizar => ')
+            print(tabulate(updateClient(idC), headers='keys', tablefmt='fancy grid'))
+
      except KeyboardInterrupt:
         print()
         print()
