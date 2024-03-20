@@ -82,7 +82,7 @@ def deleteProducto(id):
     data = gP.getProductoCodigo(id)
     if len(data) > 0: 
         peticion = requests.delete(f'http://154.38.171.54:5008/productos/{id}')
-        if peticion.status_code == 204:
+        if peticion.status_code == 200:
             return {
                 'body': [{'Mensaje': 'Producto eliminado satisfactoriamente'}],
                 'status': peticion.status_code,
