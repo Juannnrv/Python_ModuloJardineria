@@ -139,8 +139,9 @@ def updateClient(id):
     for val in data:
         
         if opcion == 1:
-            nuevoCodigo= input('Ingrese el nuevo código del cliente => ')
-            if nuevoCodigo.isdigit():
+            nuevoCodigo= (input('Ingrese el nuevo código del cliente => '))
+            if (re.match(r'^[0-9]+$', nuevoCodigo)):
+                nuevoCodigo = int(nuevoCodigo)
                 data = data[0]
                 data['codigo_cliente'] = nuevoCodigo 
 
@@ -149,6 +150,23 @@ def updateClient(id):
         res = peticion.json()
         return [res]
 
+
+def menuUpdate():
+
+    print("""
+                  ---ACTUALIZACIONES---
+
+              1. Actualizar toda la información de un cliente
+              2. Actualizar un dato en especifico de la información del cliente
+ """)
+    opcion = int(input('\nSelecciona una de las opciones => '))
+    
+    # if opcion == 1:
+    # # CREAR UNA NUEVA FUNCIÓN QUE PUEDA EDITAR TODA LA DATA
+
+    if opcion == 2:
+        idC = input('Ingresa el ID del cliente que deseas actualizar => ')
+        print(tabulate(updateClient(idC), headers='keys', tablefmt='fancy grid'))
 
 
   
@@ -171,13 +189,12 @@ def menu():
      try:
         opcion = int(input('\nSeleccione una de las opciones => '))
         if opcion == 1:
-            print(tabulate(postClientes(), headers='keys', tablefmt='fancy grid'))
+            print(tabulate(postClientes(), headers='keys', tablefmt='fancy_grid'))
         if opcion == 2:
             idCliente = input('Ingrese el ID del cliente que desea eliminar => ')
-            print(tabulate(deleteClient(idCliente) , headers='keys', tablefmt='fancy grid'))
+            print(tabulate(deleteClient(idCliente) , headers='keys', tablefmt='fancy_grid'))
         if opcion == 3:
-            idC = input('Ingresa el ID del cliente que deseas actualizar => ')
-            print(tabulate(updateClient(idC), headers='keys', tablefmt='fancy grid'))
+            menuUpdate()
 
      except KeyboardInterrupt:
         print()
