@@ -124,7 +124,7 @@ def menu():
                 print(tabulate(postEmpleado(), headers='keys', tablefmt='fancy grid'))
             elif opcion == 2:
                 id= input('Ingrese el Id del empleado que desee eliminar => ')
-                print(tabulate(deleteEmpleado(id), headers='keys', tablefmt='fancy grid'))
+                print(tabulate(deleteEmpleado(id), headers='keys', tablefmt='fancy grid')) # Aún asi funciona
         except KeyboardInterrupt:
             print()
             print()
