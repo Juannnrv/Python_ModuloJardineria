@@ -103,15 +103,15 @@ def menu():
         opcion = int(input('\nSeleccione una de las opciones => '))
 
         if opcion == 1:
-           print(tabulate(postProducto(), headers='keys', tablefmt='fancy grid'))
+           print(tabulate(postProducto(), headers='keys', tablefmt='fancy_grid'))
 
         elif opcion == 2:
            idProductoDele = input('Ingrese el id del producto que deseas eliminar => ')
-           print(tabulate(deleteProducto(idProductoDele), headers='keys', tablefmt='fancy grid')) # Aún asi funciona
+           print(tabulate(deleteProducto(idProductoDele), headers='keys', tablefmt='fancy_grid')) # Aún asi funciona
 
         # elif opcion == 3:
         #     idProductoUpt = input('Ingrese el id del producto el cual deseas actualizar => ')
-        #     print(tabulate(updateProducto(idProductoUpt)['body'], headers= "keys", tablefmt='fancy grid'))
+        #     print(tabulate(updateProducto(idProductoUpt)['body'], headers= "keys", tablefmt='fancy_grid'))
 
         input('Presione una tecla para continuar...')
 
