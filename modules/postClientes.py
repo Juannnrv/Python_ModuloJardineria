@@ -17,6 +17,7 @@ def postClientes():
                 while True:
                     codigo = input('Ingrese el codigo del cliente => ')
                     if (codigo.isdigit()):
+                        codigo = int(codigo)
                         data = gC.getAllClientsCodigo(codigo)
                         if(data):
                             raise Exception('El código del cliente ya existe')
@@ -85,6 +86,7 @@ def postClientes():
            if(not cliente.get('codigo_empleado_rep_ventas')):
                 codigo_empleado_rep_ventas = input('Ingrese el código del representante de ventas asignado al cliente => ')
                 if codigo_empleado_rep_ventas.isdigit():
+                    codigo_empleado_rep_ventas = int(codigo_empleado_rep_ventas)
                     cliente['codigo_empleado_rep_ventas'] = codigo_empleado_rep_ventas
 
            if(not cliente.get('limite_credito')):
@@ -133,6 +135,8 @@ def updateClient(id):
               12. Código postal del cliente
               13. Representante de ventas del cliente
               14. Límite crediticio del cliente
+
+         Presiona (Ctrl + C) para regresar al menú principal
  """)
 
     opcion = int(input('Ingresa la opción => '))
@@ -145,16 +149,194 @@ def updateClient(id):
                 data = data[0]
                 data['codigo_cliente'] = nuevoCodigo 
 
+        if opcion == 2:
+            nombre = input('Ingrese el nombre del cliente => ')
+            if(re.match(r'^[A-Za-z\s]+$', nombre)):
+                data = data[0]
+                data['nombre_cliente'] = nombre
+
+        if opcion == 3:
+            nombre = input('Ingrese el nombre de contacto del cliente => ')
+            if(re.match(r'^[A-Za-z\s]+$', nombre)):
+                data = data[0]
+                data['nombre_contacto'] = nombre  
+
+        if opcion == 4:
+            apellido = input('Ingrese el apellido de contacto del cliente => ')
+            if(re.match(r'^[A-Za-z]+$', apellido)):
+                data = data[0]
+                data['apellido_contacto'] = apellido
+                    
+        if opcion == 5:   
+            telefono = input('Ingrese el telefono del cliente => ')
+            if(re.match(r'^\d+(\s*\d+)*$', telefono)):
+                data = data[0]
+                data['telefono'] = telefono
+        
+        if opcion == 6:
+            fax = input('Ingrese el fax del cliente => ')
+            if(re.match(r'^\d+(\s*\d+)*$', fax)):
+                data = data[0]
+                data['fax'] = fax     
+
+        if opcion == 7:
+            direccion_1 = input('Ingrese la dirección 1 del cliente => ')
+            if(re.match(r'^[^\n]+$', direccion_1)):
+                data = data[0]
+                data['direccion_1'] = direccion_1    
+
+        if opcion == 8:
+            direccion_2 = input('Ingrese la dirección 2 del cliente => ')
+            if(re.match(r'^[^\n]+$', direccion_2)):
+                data = data[0]
+                data['direccion_2'] = direccion_2
+
+        if opcion == 9:
+            ciudad = input('Ingrese la ciudad del cliente => ')
+            if(re.match(r'^[A-Za-z\s]+$', ciudad)):
+                data = data[0]
+                data['ciudad'] = ciudad
+
+        if opcion == 10:
+            region = input('Ingrese la región del cliente => ')
+            if(re.match(r'^[A-Za-z\s]+$', region)):
+                data = data[0]
+                data['region'] = region    
+
+        if opcion == 11:
+            pais = input('Ingrese el país del cliente => ')
+            if(re.match(r'^[A-Za-z\s]+$', pais)):
+                data = data[0]
+                data['pais'] = pais
+
+        if opcion == 12:
+            codigo_postal = input('Ingrese el código postal del cliente => ')
+            if(re.match(r'^[0-9]+$', codigo_postal)):
+                data = data[0]
+                data['codigo_postal'] = codigo_postal 
+
+        if opcion == 13:
+            codigo_empleado_rep_ventas = input('Ingrese el código del representante de ventas asignado al cliente => ')
+            if codigo_empleado_rep_ventas.isdigit():
+                data = data[0]
+                codigo_empleado_rep_ventas = int(codigo_empleado_rep_ventas)
+                data['codigo_empleado_rep_ventas'] = codigo_empleado_rep_ventas
+
+        if opcion == 14:
+            limite_credito = input('Ingrese el límite crediticio del cliente => ')
+            if re.match(r'^[0-9]+(\.[0-9]+)?$', limite_credito):
+                data = data[0]
+                data['limite_credito'] = float(limite_credito)
+                print('\nNuevo cliente guardado :) ')
+
 
         peticion = requests.put(f"http://154.38.171.54:5001/cliente/{id}", data=json.dumps(data).encode("UTF-8"))
         res = peticion.json()
         return [res]
 
+# def updateAllCLient(id):
+#     cliente = {}
+#     data = gC.getAllId(id)
+#     if len(data):
+            
+#         if(not cliente.get('codigo_cliente')):
+#             nuevoCodigo= (input('Ingrese el nuevo código del cliente => '))
+#             if (re.match(r'^[0-9]+$', nuevoCodigo)):
+#                 nuevoCodigo = int(nuevoCodigo)
+#                 data = data[0]
+#                 data['codigo_cliente'] = nuevoCodigo 
+
+#         if(not cliente.get('nombre_cliente')):
+#             nombre = input('Ingrese el nombre del cliente => ')
+#             if(re.match(r'^[A-Za-z\s]+$', nombre)):
+#                 data = data[0]
+#                 data['nombre_cliente'] = nombre
+
+#         if(not cliente.get('nombre_contacto')):
+#             nombreC = input('Ingrese el nombre de contacto del cliente => ')
+#             if(re.match(r'^[A-Za-z\s]+$', nombreC)):
+#                 data = data[0]
+#                 data['nombre_contacto'] = nombreC  
+
+#         if(not cliente.get('apellido_contacto')):
+#             apellido = input('Ingrese el apellido de contacto del cliente => ')
+#             if(re.match(r'^[A-Za-z]+$', apellido)):
+#                 data = data[0]
+#                 data['apellido_contacto'] = apellido
+                    
+#         if(not cliente.get('telefono')):
+#             telefono = input('Ingrese el telefono del cliente => ')
+#             if(re.match(r'^\d+(\s*\d+)*$', telefono)):
+#                 data = data[0]
+#                 data['telefono'] = telefono
+        
+#         if(not cliente.get('fax')):
+#             fax = input('Ingrese el fax del cliente => ')
+#             if(re.match(r'^\d+(\s*\d+)*$', fax)):
+#                 data = data[0]
+#                 data['fax'] = fax     
+
+#         if(not cliente.get('direccion_1')):
+#             direccion_1 = input('Ingrese la dirección 1 del cliente => ')
+#             if(re.match(r'^[^\n]+$', direccion_1)):
+#                 data = data[0]
+#                 data['direccion_1'] = direccion_1    
+
+#         if(not cliente.get('direccion_2')):
+#             direccion_2 = input('Ingrese la dirección 2 del cliente => ')
+#             if(re.match(r'^[^\n]+$', direccion_2)):
+#                 data = data[0]
+#                 data['direccion_2'] = direccion_2
+
+#         if(not cliente.get('ciudad')):
+#             ciudad = input('Ingrese la ciudad del cliente => ')
+#             if(re.match(r'^[A-Za-z\s]+$', ciudad)):
+#                 data = data[0]
+#                 data['ciudad'] = ciudad
+
+#         if(not cliente.get('region')):
+#             region = input('Ingrese la región del cliente => ')
+#             if(re.match(r'^[A-Za-z\s]+$', region)):
+#                 data = data[0]
+#                 data['region'] = region    
+
+#         if(not cliente.get('pais')):
+#             pais = input('Ingrese el país del cliente => ')
+#             if(re.match(r'^[A-Za-z\s]+$', pais)):
+#                 data = data[0]
+#                 data['pais'] = pais
+
+#         if(not cliente.get('codigo_postal')):
+#             codigo_postal = input('Ingrese el código postal del cliente => ')
+#             if(re.match(r'^[0-9]+$', codigo_postal)):
+#                 data = data[0]
+#                 data['codigo_postal'] = codigo_postal 
+
+#         if(not cliente.get('codigo_empleado_rep_ventas')):
+#             codigo_empleado_rep_ventas = input('Ingrese el código del representante de ventas asignado al cliente => ')
+#             if codigo_empleado_rep_ventas.isdigit():
+#                 data = data[0]
+#                 codigo_empleado_rep_ventas = int(codigo_empleado_rep_ventas)
+#                 data['codigo_empleado_rep_ventas'] = codigo_empleado_rep_ventas
+
+#         if(not cliente.get('limite_credito')):
+#             limite_credito = input('Ingrese el límite crediticio del cliente => ')
+#             if re.match(r'^[0-9]+(\.[0-9]+)?$', limite_credito):
+#                 data = data[0]
+#                 data['limite_credito'] = float(limite_credito)
+                
+
+
+#     peticion = requests.put(f"http://154.38.171.54:5001/cliente/{id}", data=json.dumps(data).encode("UTF-8"))
+#     res = peticion.json()
+#     return [res]
+# print('\nNuevo cliente guardado :) ')
+
 
 def menuUpdate():
 
     print("""
-                  ---ACTUALIZACIONES---
+                               ---ACTUALIZACIONES---
 
               1. Actualizar toda la información de un cliente
               2. Actualizar un dato en especifico de la información del cliente
@@ -162,11 +344,12 @@ def menuUpdate():
     opcion = int(input('\nSelecciona una de las opciones => '))
     
     # if opcion == 1:
-    # # CREAR UNA NUEVA FUNCIÓN QUE PUEDA EDITAR TODA LA DATA
+    #     idC = input('Ingresa el ID del cliente que deseas actualizar => ')
+    #     print(tabulate(updateAllCLient(idC), headers='keys', tablefmt='fancy_grid'))
 
     if opcion == 2:
         idC = input('Ingresa el ID del cliente que deseas actualizar => ')
-        print(tabulate(updateClient(idC), headers='keys', tablefmt='fancy grid'))
+        print(tabulate(updateClient(idC), headers='keys', tablefmt='fancy_grid'))
 
 
   
