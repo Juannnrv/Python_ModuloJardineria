@@ -1,4 +1,5 @@
 from tabulate import tabulate
+import json
 import requests
 import os
 
@@ -8,17 +9,18 @@ def getAllEmpleados():
    data = peticion.json()
    return data
 
-def geAllId(codigo):
-   peticion = requests.get(f'http://154.38.171.54:5003/empleados{codigo}')
-   if peticion.ok:
-      return [peticion.json()]
+def geAllId(id):
+   peticion = requests.get(f'http://154.38.171.54:5003/empleados/{id}')
+   if (peticion.ok):
+      data = json.loads(peticion.text)
+      return data
    else:
       return []
 
-def getAllCodigoEmpleados(codigo):
-   for val in getAllEmpleados():
-      if(val.get('codigo_empleado')) == codigo:
-         return [val]
+# def getAllCodigoEmpleados(codigo):
+#    for val in getAllEmpleados():
+#       if(val.get('codigo_empleado')) == codigo:
+#          return [val]
       
 def getAllPuesto(puesto):
    for val in getAllEmpleados():

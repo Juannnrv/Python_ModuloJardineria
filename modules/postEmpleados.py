@@ -14,7 +14,7 @@ def postEmpleado():
                 while True:
                     codigo = input('Ingresa el código del empleado => ')
                     if codigo.isdigit():
-                        data = gE.getAllCodigoEmpleados(codigo)
+                        data = gE.geAllId(codigo)
                         if (data):
                             raise Exception('El código del empleado ya existe')
                         else:
@@ -60,11 +60,13 @@ def postEmpleado():
 
             if not empleado.get('puesto'):
 
-                print(""" 1. Subdirector Marketing
+                print(""" 
+                          1. Subdirector Marketing
                           2. Subdirector Ventas
                           3. Secretari@
                           4. Representante Ventas
-                          5. Director Oficina""")
+                          5. Director Oficina
+                      """)
                 
                 puesto = input('Ingresa número que fue asignado al puesto del empleado => ')
                 
@@ -82,6 +84,7 @@ def postEmpleado():
                             empleado['puesto'] = puesto
                         if puesto == 5:
                             empleado['puesto'] = puesto 
+                            
             else:
                 raise Exception('No cumple con los estandares establecidos')             
         
@@ -97,22 +100,14 @@ def postEmpleado():
     return [res]
 
 def deleteEmpleado(id):
-    data = gE.geAllId(id)
-    if len(data) > 0:
-        peticion = requests.delete(f'http://154.38.171.54:5003/empleados{id}')
-        if peticion.status_code == 204:
-            return{
-                'body': [{'Message': 'Emplead@ eliminad@ satisfactoriamente'}],
-                'status': peticion.status_code
-            }
-    return{
-        'body': [{'Message': 'Emplead@ no encontrad@', 'id': id}],
-        'status': 404
-    }
+    peticion = requests.delete(f'http://154.38.171.54:5003/empleados/{id}')
+    if peticion.status_code == 200:
+        print('\nEmpleado eliminado')
+
 
 def menu():
+    os.system('clear')
     while True:
-        os.system('clear')
         print("""
                ---ADMINISTRADOR DATOS DE EMPLEADOS---
           
@@ -124,14 +119,16 @@ def menu():
            
            """)
         try:
-            opcion= int(input('\nSelccione una de las opciones => '))
+            opcion= int(input('\nSeleccione una de las opciones => '))
             if opcion == 1:
                 print(tabulate(postEmpleado(), headers='keys', tablefmt='fancy grid'))
-            if opcion == 2:
-                idEmpleado = input('Ingrese el Id del emplead@ que desee eliminar => ')
-                print(tabulate(deleteEmpleado(idEmpleado), headers='keys', tablefmt='fancy grid'))
+            elif opcion == 2:
+                id= input('Ingrese el Id del empleado que desee eliminar => ')
+                print(tabulate(deleteEmpleado(id), headers='keys', tablefmt='fancy grid'))
         except KeyboardInterrupt:
             print()
             print()
             print('SALIENDO...')
-            break        
+            break
+
+        input('Presiona una tecla para continuar...')        
