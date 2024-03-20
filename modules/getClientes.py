@@ -10,6 +10,12 @@ def getAllCliente():
     data = peticion.json()
     return data
 
+def getAllId(id):
+    peticion = requests.get(f'http://154.38.171.54:5001/cliente/{id}')
+    if peticion.ok:
+        return [peticion.json()]
+    else:
+        return []
 
 def getAllClientsCodigo(codigo_cliente):
    for val in getAllCliente():
