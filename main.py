@@ -24,6 +24,9 @@ import modules.postProducto as CRUDproducto
 import modules.getGamas as Repgamas
 import modules.postGamas as CRUDgama
 
+import modules.getDetallePedido as Repdetallepedido
+import modules.postDetallePedido as CRUDdetallepedido
+
 
 def menuClientes():
     while True:
@@ -134,7 +137,7 @@ def menuGama():
         print('''
                     ---BIENVENIDO AL MENÚ DE GAMAS---
 
-                1. Guardar, Actualizar y Eliminar productos
+                1. Guardar, Actualizar y Eliminar gamas
 
                         Presiona (Ctrl + C) para Salir
         ''')
@@ -145,6 +148,27 @@ def menuGama():
                  if (opcion>=0 and opcion<=1):
                     if(opcion == 1):
                         CRUDgama.menu()
+        except KeyboardInterrupt:
+              print('SALIENDO...')
+              break
+        
+def menuDetallepedido():
+    while True:
+        os.system('clear')
+        print('''
+                    ---BIENVENIDO AL MENÚ DE DETALLES DE PEDIDO---
+
+                1. Guardar, Actualizar y Eliminar detalles de pedido
+
+                           Presiona (Ctrl + C) para Salir
+        ''')
+        try:
+           opcion = (input("\nSelecione una de las opciones: "))
+           if(re.match(r'[0-9]+$', opcion)):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=1):
+                    if(opcion == 1):
+                        CRUDdetallepedido.menu()
         except KeyboardInterrupt:
               print('SALIENDO...')
               break
@@ -177,13 +201,14 @@ if __name__ == "__main__":
                         5. Pagos
                         6. Productos
                         7. Gama
+                        8. Detalle de pedido
 
                  Presiona (Ctrl + C) para Salir
 ''')
         opcion = (input('\n Seleccione una de las opciones => '))
         if(re.match(r'[0-9]+$', opcion) is not None):
             opcion = int(opcion)
-            if (opcion>=0 and opcion<=7):
+            if (opcion>=0 and opcion<=8):
                     if opcion == 1:
                         menuClientes()
                     elif opcion == 2:
@@ -198,6 +223,8 @@ if __name__ == "__main__":
                         menuProducto()
                     elif opcion == 7:
                         menuGama()
+                    elif opcion == 8:
+                        menuDetallepedido()
                     elif opcion == 0:
                         break
                     print('SALIENDO...')
