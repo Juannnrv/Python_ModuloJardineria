@@ -29,62 +29,41 @@ def postEmpleado():
                 if re.match(r'^[A-Za-z]+$', nombre):
                     empleado['nombre'] = nombre
 
-            if not empleado.get('apellido1'):
+            elif not empleado.get('apellido1'):
                 apellido1 = input('Ingresa el primer apellido del empleado => ')
                 if re.match(r'^[A-Za-z]+$', apellido1):
                     empleado['apellido1'] = apellido1
 
-            if not empleado.get('apellido2'):
+            elif not empleado.get('apellido2'):
                 apellido2 = input('Ingresa el segundo apellido del empleado => ')
                 if re.match(r'^[A-Za-z]+$', apellido2):
                     empleado['apellido2'] = apellido2
 
-            if not empleado.get('extension'):
+            elif not empleado.get('extension'):
                 extension = input('Ingresa la extensión del empleado => ')
                 if re.match(r'^[0-9]+$', extension):
                     empleado['extension'] = extension
             
-            if not empleado.get('email'):
+            elif not empleado.get('email'):
                 email = input('Ingresa el email del empleado => ')
                 if re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$', email):
                     empleado['email'] = email
 
-            if not empleado.get('codigo_oficina'):
+            elif not empleado.get('codigo_oficina'):
                 codigo_oficina = input('Ingresa el código de oficina del empleado => ')
                 if re.match(r'^[0-9]{2,3}-[0-9]{2,3}$', codigo_oficina):
                     empleado['codigo_oficina'] = codigo_oficina
 
-            if not empleado.get('codigo_jefe'):
+            elif not empleado.get('codigo_jefe'):
                 codigo_jefe = input('Ingresa el código del jefe del empleado => ')
                 if codigo_jefe.isdigit():
                     codigo_jefe = int(codigo_jefe)
                     empleado['codigo_jefe'] = codigo_jefe
 
-            if not empleado.get('puesto'):
-
-                print(""" 
-                          1. Subdirector Marketing
-                          2. Subdirector Ventas
-                          3. Secretari@
-                          4. Representante Ventas
-                          5. Director Oficina
-                      """)
-                
-                puesto = input('Ingresa el número que fue asignado al puesto del empleado => ')
-                puesto = int(puesto)
-
-                if puesto>=1 and puesto<=5:
-
-                    if puesto == 1:
-                        empleado['puesto'] = puesto
-                    if puesto == 2:
-                        empleado['puesto'] = puesto
-                    if puesto == 3:
-                        empleado['puesto'] = puesto
-                    if puesto == 4:
-                        empleado['puesto'] = puesto
-                    if puesto == 5:
-                        empleado['puesto'] = puesto 
+            elif not empleado.get('puesto'):
+                puesto = input('Ingresa el puesto del empleado => ')
+                if re.match(r'^[A-Za-z\s]+$', puesto):
+                    empleado['puesto'] = puesto
                             
             else:
                 raise Exception('No cumple con los estandares establecidos')             
@@ -179,32 +158,10 @@ def updateEmpleado(id):
                     data['codigo_jefe'] = codigo_jefe
 
         if opcion == 9:
-
-            print(""" 
-                            1. Subdirector Marketing
-                            2. Subdirector Ventas
-                            3. Secretari@
-                            4. Representante Ventas
-                            5. Director Oficina
-            """)
-                    
-            puesto = input('Ingresa número que fue asignado al puesto del empleado => ')
-                    
-            if re.match(r'^[0-9]+$', puesto):
+            puesto = input('Ingresa el puesto del empleado => ')
+            if re.match(r'^[A-Za-z\s]+$', puesto):
                 data = data[0]
-                puesto = int(puesto)
-                if puesto>=1 and puesto<=5:
-
-                            if puesto == 1:
-                                data['puesto'] = puesto
-                            if puesto == 2:
-                                data['puesto'] = puesto
-                            if puesto == 3:
-                                data['puesto'] = puesto
-                            if puesto == 4:
-                                data['puesto'] = puesto
-                            if puesto == 5:
-                                data['puesto'] = puesto 
+                data['puesto'] = puesto
             
             else:
                 print('No cumple con los estandares establecidos')
