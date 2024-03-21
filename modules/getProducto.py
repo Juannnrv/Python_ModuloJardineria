@@ -15,7 +15,7 @@ def getProductoCodigo(codigo):
 
    
 def getAllId(id):
-   peticion = requests.get(f'http://154.38.171.54:5002/detalle_pedido/{id}')
+   peticion = requests.get(f'http://154.38.171.54:5008/productos/{id}')
    if peticion.ok:
       return [peticion.json()]
    else:
