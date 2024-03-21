@@ -149,86 +149,88 @@ def updateClient(id):
                 data = data[0]
                 data['codigo_cliente'] = nuevoCodigo 
 
-        if opcion == 2:
+        elif opcion == 2:
             nombre = input('Ingrese el nombre del cliente => ')
             if(re.match(r'^[A-Za-z\s]+$', nombre)):
                 data = data[0]
                 data['nombre_cliente'] = nombre
 
-        if opcion == 3:
+        elif opcion == 3:
             nombre = input('Ingrese el nombre de contacto del cliente => ')
             if(re.match(r'^[A-Za-z\s]+$', nombre)):
                 data = data[0]
                 data['nombre_contacto'] = nombre  
 
-        if opcion == 4:
+        elif opcion == 4:
             apellido = input('Ingrese el apellido de contacto del cliente => ')
             if(re.match(r'^[A-Za-z]+$', apellido)):
                 data = data[0]
                 data['apellido_contacto'] = apellido
                     
-        if opcion == 5:   
+        elif opcion == 5:   
             telefono = input('Ingrese el telefono del cliente => ')
             if(re.match(r'^\d+(\s*\d+)*$', telefono)):
                 data = data[0]
                 data['telefono'] = telefono
         
-        if opcion == 6:
+        elif opcion == 6:
             fax = input('Ingrese el fax del cliente => ')
             if(re.match(r'^\d+(\s*\d+)*$', fax)):
                 data = data[0]
                 data['fax'] = fax     
 
-        if opcion == 7:
+        elif opcion == 7:
             direccion_1 = input('Ingrese la dirección 1 del cliente => ')
             if(re.match(r'^[^\n]+$', direccion_1)):
                 data = data[0]
                 data['direccion_1'] = direccion_1    
 
-        if opcion == 8:
+        elif opcion == 8:
             direccion_2 = input('Ingrese la dirección 2 del cliente => ')
             if(re.match(r'^[^\n]+$', direccion_2)):
                 data = data[0]
                 data['direccion_2'] = direccion_2
 
-        if opcion == 9:
+        elif opcion == 9:
             ciudad = input('Ingrese la ciudad del cliente => ')
             if(re.match(r'^[A-Za-z\s]+$', ciudad)):
                 data = data[0]
                 data['ciudad'] = ciudad
 
-        if opcion == 10:
+        elif opcion == 10:
             region = input('Ingrese la región del cliente => ')
             if(re.match(r'^[A-Za-z\s]+$', region)):
                 data = data[0]
                 data['region'] = region    
 
-        if opcion == 11:
+        elif opcion == 11:
             pais = input('Ingrese el país del cliente => ')
             if(re.match(r'^[A-Za-z\s]+$', pais)):
                 data = data[0]
                 data['pais'] = pais
 
-        if opcion == 12:
+        elif opcion == 12:
             codigo_postal = input('Ingrese el código postal del cliente => ')
             if(re.match(r'^[0-9]+$', codigo_postal)):
                 data = data[0]
                 data['codigo_postal'] = codigo_postal 
 
-        if opcion == 13:
+        elif opcion == 13:
             codigo_empleado_rep_ventas = input('Ingrese el código del representante de ventas asignado al cliente => ')
             if codigo_empleado_rep_ventas.isdigit():
                 data = data[0]
                 codigo_empleado_rep_ventas = int(codigo_empleado_rep_ventas)
                 data['codigo_empleado_rep_ventas'] = codigo_empleado_rep_ventas
 
-        if opcion == 14:
+        elif opcion == 14:
             limite_credito = input('Ingrese el límite crediticio del cliente => ')
             if re.match(r'^[0-9]+(\.[0-9]+)?$', limite_credito):
                 data = data[0]
                 data['limite_credito'] = float(limite_credito)
                 print('\nNuevo cliente guardado :) ')
 
+        else:
+            print('No cumple con los estandares establecidos')
 
         peticion = requests.put(f"http://154.38.171.54:5001/cliente/{id}", data=json.dumps(data).encode("UTF-8"))
         res = peticion.json()
