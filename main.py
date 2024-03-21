@@ -22,6 +22,7 @@ import modules.getProducto as Repproducto
 import modules.postProducto as CRUDproducto
 
 import modules.getGamas as Repgamas
+import modules.postGamas as CRUDgama
 
 
 def menuClientes():
@@ -126,6 +127,27 @@ def menuProducto():
         except KeyboardInterrupt:
               print('SALIENDO...')
               break
+        
+def menuGama():
+    while True:
+        os.system('clear')
+        print('''
+                    ---BIENVENIDO AL MENÚ DE GAMAS---
+
+                1. Guardar, Actualizar y Eliminar productos
+
+                        Presiona (Ctrl + C) para Salir
+        ''')
+        try:
+           opcion = (input("\nSelecione una de las opciones: "))
+           if(re.match(r'[0-9]+$', opcion)):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=1):
+                    if(opcion == 1):
+                        CRUDgama.menu()
+        except KeyboardInterrupt:
+              print('SALIENDO...')
+              break
 
 
 if __name__ == "__main__":
@@ -174,8 +196,8 @@ if __name__ == "__main__":
                         pagos.menu()
                     elif opcion == 6:
                         menuProducto()
-                    #elif opcion == 7:
-                        #gamas.menu()
+                    elif opcion == 7:
+                        menuGama()
                     elif opcion == 0:
                         break
                     print('SALIENDO...')
