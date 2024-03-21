@@ -179,8 +179,8 @@ def menu():
             if opcion == 1:
                print(tabulate(postOficina(), headers='keys', tablefmt='fancy_grid'))
             elif opcion == 2:
-               idO = ('Ingresa el ID del empleado que desee actualizar => ')
-               print(tabulate(deleteOficina(idO), headers='keys', tablefmt='fancy_grid'))
+               id = input('Ingresa el ID del empleado que desee actualizar => ')
+               print(tabulate(deleteOficina(id), headers='keys', tablefmt='fancy_grid'))
             elif opcion == 3:
                idE = input('Ingresa el ID del empleado que desee actualizar => ')
                print(tabulate(updateOficina(idE), headers='keys', tablefmt='fancy_grid'))
