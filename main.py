@@ -14,7 +14,8 @@ import modules.postOficinas as CRUDoficina
 import modules.getEmpleados as Repempleado
 import modules.postEmpleados as CRUDempleados
 
-import modules.getPedidos as pedido
+import modules.getPedidos as Reppedidos
+import modules.postPedidos as CRUDpedidos
 
 import modules.getPagos as Reppagos
 import modules.postPagos as CRUDpagos
@@ -107,6 +108,30 @@ def menuEmpleados():
             print()
             print('SALIENDO...')
             break
+
+def menuPedido():
+    while True:
+        os.system('clear')
+        print('''
+                    ---BIENVENIDO AL MENÚ DE PEDIDOS---
+
+                1. Reportes de los pedidos
+                2. Guardar, Actualizar y Eliminar pedidos
+
+                        Presiona (Ctrl + C) para Salir
+        ''')
+        try:
+           opcion = (input("\nSelecione una de las opciones: "))
+           if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=2):
+                    if(opcion == 1):
+                        Reppedidos.menu()
+                    elif(opcion == 2):
+                        CRUDpedidos.menu()
+        except KeyboardInterrupt:
+              print('SALIENDO...')
+              break
 
 def menuPago():
     while True:
@@ -241,7 +266,7 @@ if __name__ == "__main__":
                     elif opcion == 3:
                         menuEmpleados()
                     elif opcion == 4:
-                        pedido.menu()
+                        menuPedido()
                     elif opcion == 5:
                         menuPago()
                     elif opcion == 6:

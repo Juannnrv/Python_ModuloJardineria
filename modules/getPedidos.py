@@ -9,6 +9,19 @@ def getAllPedidos():
    data = peticion.json()
    return data
 
+def getAllId(id):
+    peticion = requests.get(f'http://154.38.171.54:5007/pedidos/{id}')
+    if peticion.ok:
+        return [peticion.json()]
+    else:
+        return []
+    
+def getAllCodigo(codigo):
+    for val in getAllPedidos():
+       if(val.get('codigo_pedido')) == codigo:
+          return [val]
+    return []
+
 
 def getAllEstadosPedidos():
     EstadosRepetidos = set()
