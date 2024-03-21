@@ -76,10 +76,12 @@ def postOficina():
     res ['Mensaje'] = 'Oficina Guardada'
     return [res]
 
-def deleteOficina(id):
+def deleteOficina(id): # TERMINAR DE TESTEAR    
     peticion = requests.delete(f'http://154.38.171.54:5005/oficinas/{id}')
     if peticion.status_code == 200:
-        print('\nOficina eliminado')
+        print("\nOficina eliminada satisfactoriamente")
+
+    print(peticion.status_code)
 
 
 def updateOficina(id):
@@ -176,10 +178,10 @@ def menu():
             opcion = int(input('\nSeleccione una de las opciones => '))
             if opcion == 1:
                print(tabulate(postOficina(), headers='keys', tablefmt='fancy_grid'))
-            if opcion == 2:
+            elif opcion == 2:
                idO = ('Ingresa el ID del empleado que desee actualizar => ')
                print(tabulate(deleteOficina(idO), headers='keys', tablefmt='fancy_grid'))
-            if opcion == 3:
+            elif opcion == 3:
                idE = input('Ingresa el ID del empleado que desee actualizar => ')
                print(tabulate(updateOficina(idE), headers='keys', tablefmt='fancy_grid'))
         except KeyboardInterrupt:

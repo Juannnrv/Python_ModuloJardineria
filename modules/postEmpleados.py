@@ -50,7 +50,7 @@ def postEmpleado():
                     empleado['email'] = email
 
             if not empleado.get('codigo_oficina'):
-                codigo_oficina = input('Ingresa la codigo de oficina del empleado => ')
+                codigo_oficina = input('Ingresa el código de oficina del empleado => ')
                 if re.match(r'^[0-9]{2,3}-[0-9]{2,3}$', codigo_oficina):
                     empleado['codigo_oficina'] = codigo_oficina
 
@@ -70,22 +70,21 @@ def postEmpleado():
                           5. Director Oficina
                       """)
                 
-                puesto = input('Ingresa número que fue asignado al puesto del empleado => ')
-                
-                if re.match(r'^[0-9]+$', puesto):
-                    puesto = int(puesto)
-                    if puesto>=1 and puesto<=5:
+                puesto = input('Ingresa el número que fue asignado al puesto del empleado => ')
+                puesto = int(puesto)
 
-                        if puesto == 1:
-                            empleado['puesto'] = puesto
-                        if puesto == 2:
-                            empleado['puesto'] = puesto
-                        if puesto == 3:
-                            empleado['puesto'] = puesto
-                        if puesto == 4:
-                            empleado['puesto'] = puesto
-                        if puesto == 5:
-                            empleado['puesto'] = puesto 
+                if puesto>=1 and puesto<=5:
+
+                    if puesto == 1:
+                        empleado['puesto'] = puesto
+                    if puesto == 2:
+                        empleado['puesto'] = puesto
+                    if puesto == 3:
+                        empleado['puesto'] = puesto
+                    if puesto == 4:
+                        empleado['puesto'] = puesto
+                    if puesto == 5:
+                        empleado['puesto'] = puesto 
                             
             else:
                 raise Exception('No cumple con los estandares establecidos')             
