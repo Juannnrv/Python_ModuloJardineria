@@ -12,8 +12,7 @@ def getAllEmpleados():
 def geAllId(id):
    peticion = requests.get(f'http://154.38.171.54:5003/empleados/{id}')
    if (peticion.ok):
-      data = json.loads(peticion.text)
-      return data
+      return [peticion.json()]
    else:
       return []
 
