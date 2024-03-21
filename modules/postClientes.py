@@ -5,8 +5,6 @@ import re
 import modules.getClientes as gC
 from tabulate import tabulate
 
-#  Falta put
-
 def postClientes():
     # http://154.38.171.54:5001/cliente
 
@@ -335,29 +333,6 @@ def updateClient(id):
 # print('\nNuevo cliente guardado :) ')
 
 
-def menuUpdate():
-
-    print("""
-                               ---ACTUALIZACIONES---
-
-              1. Actualizar toda la información de un cliente
-              2. Actualizar un dato en especifico de la información del cliente
- """)
-    opcion = int(input('\nSelecciona una de las opciones => '))
-    
-    # if opcion == 1:
-    #     idC = input('Ingresa el ID del cliente que deseas actualizar => ')
-    #     print(tabulate(updateAllCLient(idC), headers='keys', tablefmt='fancy_grid'))
-
-    if opcion == 2:
-        idC = input('Ingresa el ID del cliente que deseas actualizar => ')
-        print(tabulate(updateClient(idC), headers='keys', tablefmt='fancy_grid'))
-
-
-  
-
-    
-
 def menu():
     os.system('clear')
     while True:
@@ -379,8 +354,8 @@ def menu():
             idCliente = input('Ingrese el ID del cliente que desea eliminar => ')
             print(tabulate(deleteClient(idCliente) , headers='keys', tablefmt='fancy_grid'))
         if opcion == 3:
-            menuUpdate()
-
+            id = input('Ingrese el Id del cliente que desee actualizar => ')
+            print(tabulate(updateClient(id) , headers='keys', tablefmt='fancy_grid'))
      except KeyboardInterrupt:
         print()
         print()
