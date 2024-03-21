@@ -42,11 +42,11 @@ def getAllPedidosAtrasadosDeTiempo():
     PedidosAceptados = []
 
     for val in getAllPedidos():
-        if (val.get('estado') == 'Entregado') and val.get('fecha_entrega') is None:
-            val['fecha_entrega'] = val.get('fecha_esperada')
+        if (val.get('estado') == 'Entregado') and val.get('fechaEntrega') is None:
+            val['fechaEntrega'] = val.get('fecha_esperada')
         if val.get('estado') == 'Entregado':
             date_1 = '/'.join(val.get('fecha_esperada').split('-')[::-1])
-            date_2 = '/'.join(val.get('fecha_entrega').split('-')[::-1])
+            date_2 = '/'.join(val.get('fechaEntrega').split('-')[::-1])
             start = datetime.strptime(date_1, '%d/%m/%Y')
             end = datetime.strptime(date_2, '%d/%m/%Y')
             diff = end.date() - start.date()
@@ -56,7 +56,7 @@ def getAllPedidosAtrasadosDeTiempo():
                     'codigo_pedido': val.get('codigo_pedido'),
                     'codigo_cliente': val.get('codigo_cliente'),
                     'fecha_esperada': val.get('fecha_esperada'),
-                    'fecha_entrega': val.get('fecha_entrega')
+                    'fechaEntrega': val.get('fechaEntrega')
 
                 })
 
@@ -66,12 +66,12 @@ def getAllPedidosEntregados2DiasAntes():
     PedidosEntregados2DiasAntes = []
 
     for val in getAllPedidos():
-        if (val.get('estado') == 'Entregado') and val.get('fecha_entrega') is None:
-            val['fecha_entrega'] = val.get('fecha_esperada')
+        if (val.get('estado') == 'Entregado') and val.get('fechaEntrega') is None:
+            val['fechaEntrega'] = val.get('fecha_esperada')
         
         if val.get('estado') == 'Entregado':
             date_1 = '/'.join(val.get('fecha_esperada').split('-')[::-1])
-            date_2 = '/'.join(val.get('fecha_entrega').split('-')[::-1])
+            date_2 = '/'.join(val.get('fechaEntrega').split('-')[::-1])
             start = datetime.strptime(date_1, '%d/%m/%Y')
             end = datetime.strptime(date_2, '%d/%m/%Y')
             diff = (end.date() - start.date()).days
@@ -80,7 +80,7 @@ def getAllPedidosEntregados2DiasAntes():
                     'codigo_pedido': val.get('codigo_pedido'),
                     'codigo_cliente': val.get('codigo_cliente'),
                     'fecha_esperada': val.get('fecha_esperada'),
-                    'fecha_entrega': val.get('fecha_entrega')
+                    'fechaEntrega': val.get('fechaEntrega')
                 })
 
     return PedidosEntregados2DiasAntes
@@ -90,12 +90,12 @@ def getAllPedidosRechazados2009():
 
     for val in getAllPedidos():
         codigo_pedido = val.get('codigo_pedido')
-        fecha_entrega = val.get('fecha_entrega')
-        if fecha_entrega is not None and fecha_entrega.startswith("2009") and val.get('estado') == "Rechazado":
+        fechaEntrega = val.get('fechaEntrega')
+        if fechaEntrega is not None and fechaEntrega.startswith("2009") and val.get('estado') == "Rechazado":
             PedidosRechazados2009.append({
                 'codigo_pedido': codigo_pedido,
                 'estado': val.get('estado'),
-                'fecha_entrega': fecha_entrega
+                'fechaEntrega': fechaEntrega
             })
 
     return PedidosRechazados2009
@@ -104,13 +104,13 @@ def getPedidosEntregadosEnEnero():
     pedidos_entregados_en_enero = []
 
     for pedido in getAllPedidos():
-        fecha_entrega = pedido.get('fecha_entrega')
-        if fecha_entrega is not None:
-            fecha_entrega_dt = datetime.strptime(fecha_entrega, '%Y-%m-%d')
-            if fecha_entrega_dt.month == 1 and pedido.get('estado') == 'Entregado': 
+        fechaEntrega = pedido.get('fechaEntrega')
+        if fechaEntrega is not None:
+            fechaEntrega_dt = datetime.strptime(fechaEntrega, '%Y-%m-%d')
+            if fechaEntrega_dt.month == 1 and pedido.get('estado') == 'Entregado': 
                 pedidos_entregados_en_enero.append({
                     'codigo_pedido': pedido.get('codigo_pedido'),
-                    'fecha_entrega': fecha_entrega,
+                    'fechaEntrega': fechaEntrega,
                     'estado': pedido.get('estado')
                 })
 
