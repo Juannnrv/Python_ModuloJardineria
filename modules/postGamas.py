@@ -92,8 +92,8 @@ def updateGama(id):
 
 
 def menu():
-    os.system('clear')
     while True:
+     os.system('clear')
      print("""
                ---ADMINISTRADOR DATOS DE GAMAS---
           
@@ -120,3 +120,5 @@ def menu():
         print()
         print('SALIENDO...')
         break
+     
+     input('Presione la tecla Enter para poder continuar...')

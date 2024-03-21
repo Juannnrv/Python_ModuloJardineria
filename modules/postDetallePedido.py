@@ -44,11 +44,15 @@ def postDetallePedido():
                 if numero_linea.isdigit():
                     numero_linea = int(numero_linea)
                     detallePedido['numero_linea'] = numero_linea
-                break
+                    break
+           
+                else:
+                    print('No cumple con los estandares')
 
         except Exception as error:
             print('---ERROR---')
             print(error)
+            break
     
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
     peticion = requests.post('http://154.38.171.54:5002/detalle_pedido', headers=headers, data=json.dumps(detallePedido))
@@ -67,11 +71,11 @@ def updateDetallePedido(id):
         print("""
                   ¿Qué dato deseas actualizar?
 
-              1. Código de pedido
-              2. Código del producto
-              3. Cantidad
-              4. Precio por unidad
-              5. Número en linea
+                    1. Código de pedido
+                    2. Código del producto
+                    3. Cantidad
+                    4. Precio por unidad
+                    5. Número en linea
               
          Presiona (Ctrl + C) para regresar al menú principal
  """)
@@ -120,8 +124,8 @@ def updateDetallePedido(id):
     return [res]
 
 def menu():
-    os.system('clear')
     while True:
+     os.system('clear')
      print("""
             ---ADMINISTRADOR DATOS DE DETALLES DE PEDIDO---
           
@@ -148,3 +152,5 @@ def menu():
         print()
         print('SALIENDO...')
         break
+     
+     input('presion la tecla Enter para continuar...')

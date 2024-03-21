@@ -6,6 +6,7 @@ def getAllDetallePedido():
     peticion = requests.get('http://154.38.171.54:5001/cliente')
     data = peticion.json()
     return data
+
 def getAllCodigos(codigo_pedido):
     for val in getAllDetallePedido():
       if (val.get('codigo_pedido') == codigo_pedido):

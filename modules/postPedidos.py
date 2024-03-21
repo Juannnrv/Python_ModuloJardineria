@@ -139,8 +139,8 @@ def updatePedido(id):
         return [res]
     
 def menu():
-    os.system('clear')
     while True:
+     os.system('clear')
      print("""
                ---ADMINISTRADOR DATOS DE PEDIDOS---
           
@@ -167,4 +167,6 @@ def menu():
         print()
         print('SALIENDO...')
         break
+     
+     input('Presione la tecla Enter para poder continuar...')
         

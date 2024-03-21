@@ -123,8 +123,8 @@ def updatePagos(id):
         return [res]
 
 def menu():
-    os.system('clear')
     while True:
+     os.system('clear')
      print("""
                ---ADMINISTRADOR DATOS DE PAGOS---
           
@@ -151,3 +151,5 @@ def menu():
         print()
         print('SALIENDO...')
         break
+     
+     input('Presiona la tecla Enter para continuar...')

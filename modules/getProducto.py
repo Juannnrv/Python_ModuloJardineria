@@ -9,8 +9,14 @@ def getAllDataProduct():
    return data
 
 def getProductoCodigo(codigo):
-   peticion = requests.get(f"http://154.38.171.54:5008/productos/{codigo}")
-   if(peticion.ok):
+   peticion = requests.get(f"http://154.38.171.54:5008/productos/{codigo}") 
+
+   return [peticion.json()] if peticion.ok else[]
+
+   
+def getAllId(id):
+   peticion = requests.get(f'http://154.38.171.54:5002/detalle_pedido/{id}')
+   if peticion.ok:
       return [peticion.json()]
    else:
       return []

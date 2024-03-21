@@ -172,8 +172,8 @@ def updateEmpleado(id):
 
 
 def menu():
-    os.system('clear')
     while True:
+        os.system('clear')
         print("""
                ---ADMINISTRADOR DATOS DE EMPLEADOS---
           
@@ -200,4 +200,6 @@ def menu():
             print('SALIENDO...')
             break
 
-        input('Presiona una tecla para continuar...')        
+        input('Presiona una la tecla Enter para continuar...')
+
+

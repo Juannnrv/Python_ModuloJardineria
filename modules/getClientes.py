@@ -17,10 +17,10 @@ def getAllId(id):
     else:
         return []
 
-def getAllClientsCodigo(codigo_cliente):
-   for val in getAllCliente():
-      if (val.get('codigo_cliente') == codigo_cliente):
-         return [val]
+def getClienteCodigo(codigo):
+   peticion = requests.get(f"http://154.38.171.54:5001/cliente/{codigo}") 
+
+   return [peticion.json()] if peticion.ok else[]
 
 def getAllClientsName():
     clienteName = []

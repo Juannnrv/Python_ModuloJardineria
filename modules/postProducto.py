@@ -56,11 +56,13 @@ def postProducto():
             if(not producto.get('precio_venta')):
                 precio_venta = (input('Ingrese el precio de venta del producto => '))
                 if precio_venta.isdigit():
+                    precio_venta = int(precio_venta)
                     producto['precio_venta'] = precio_venta
 
             if(not producto.get('precio_proveedor')):
                 precio_proveedor = (input('Ingrese el precio del producto asignado por el proveedor => '))
                 if precio_proveedor.isdigit():
+                    precio_proveedor = int(precio_proveedor)
                     producto['precio_proveedor'] = precio_proveedor
                     break 
 
@@ -83,6 +85,99 @@ def deleteProducto(id):
     if peticion.status_code == 200:
         print('\nProducto eliminado')
 
+def updateProducto(id):
+    data = gP.getAllId(id)
+    if len(data):
+        print("""
+            ¿Qué dato deseas actualizar?
+
+              1. Código del producto
+              2. Nombre del producto
+              3. Gama del producto
+              4. Dimensiones del producto
+              5. Proveedor del producto
+              6. Descripción del producto
+              7. Cantidad en stock del producto
+              8. Precio de venta del producto
+              9. Precio proveedor del producto
+              
+         Presiona (Ctrl + C) para regresar al menú principal
+ """)
+        opcion = input('\nIngresa una opción => ')
+        while True:
+            try:
+                if opcion == 1:
+                    nuevoCodigo= (input('Ingrese el nuevo código del cliente => '))
+                    if ((re.match(r'^[A-Z]{2}-[0-9]{2,3}$', nuevoCodigo)) or (nuevoCodigo.isdigit())):
+                        nuevoCodigo = int(nuevoCodigo)
+                        data = data[0]
+                        data['codigo_cliente'] = nuevoCodigo 
+                    
+                if opcion == 2:
+                    nombre = input('Ingrese el nombre del producto => ')
+                    if(re.match(r'^[A-Za-z\s]+$', nombre)):
+                        data = data[0]
+                        data['nombre'] = nombre
+                
+                if opcion == 3:
+                    gama = input('Ingrese la gama del producto => ')
+                    if re.match(r'^[A-Za-z]+$', gama):
+                        data = data[0]
+                        data['gama'] = gama
+                        
+                if opcion == 4:
+                    dimensiones = input('Ingrese las dimensiones del producto => ')
+                    if re.match(r'^[0-9]{1,3}-[0-9]{1,3}$', dimensiones):
+                        data = data[0]
+                        data['dimensiones'] = dimensiones
+
+                if opcion == 5:
+                    proveedor = input('Ingrese el nombre del proveedor => ')
+                    if re.match(r'^[A-Za-z\s]+$', proveedor):
+                        data = data[0]
+                        data['proveedor'] = proveedor
+
+                if opcion == 6:
+                    descripcion = input('Ingresa la descripcion del producto => ')
+                    if re.match(r'^[^\n]+$', descripcion):
+                        data = data[0]
+                        data['descripcion'] = descripcion
+
+                if opcion == 7:
+                    cantidad_en_stock = (input('Ingrese la cantidad en stock => '))
+                    if cantidad_en_stock.isdigit():
+                        cantidad_en_stock = int(cantidad_en_stock)
+                        data = data[0]
+                        data['cantidad_en_stock'] = cantidad_en_stock  
+
+                if opcion == 8:
+                    precio_venta = (input('Ingrese el precio de venta del producto => '))
+                    if precio_venta.isdigit():
+                        precio_venta = int(precio_venta)
+                        data = data[0]
+                        data['precio_venta'] = precio_venta
+
+                if opcion == 9:
+                    precio_proveedor = (input('Ingrese el precio del producto asignado por el proveedor => '))
+                    if precio_proveedor.isdigit():
+                        precio_proveedor = int(precio_proveedor)
+                        data = data[0]
+                        data['precio_proveedor'] = precio_proveedor
+                        break 
+
+                else:
+                    raise Exception('No cumple con los estandares establecidos')
+                
+                peticion = requests.put(f"http://154.38.171.54:5001/cliente/{id}", data=json.dumps(data).encode("UTF-8"))
+                res = peticion.json()
+                return [res]
+                
+            except Exception as error:
+                print('---ERROR---')
+                print(error)
+                break
+                
+                
 
 
 def menu():
@@ -109,9 +204,9 @@ def menu():
            idProductoDele = input('Ingrese el id del producto que deseas eliminar => ')
            print(tabulate(deleteProducto(idProductoDele), headers='keys', tablefmt='fancy_grid')) # Aún asi funciona
 
-        # elif opcion == 3:
-        #     idProductoUpt = input('Ingrese el id del producto el cual deseas actualizar => ')
-        #     print(tabulate(updateProducto(idProductoUpt)['body'], headers= "keys", tablefmt='fancy_grid'))
+        elif opcion == 3:
+           idProductoUpt = input('Ingrese el id del producto el cual deseas actualizar => ')
+           print(tabulate(updateProducto(idProductoUpt), headers= "keys", tablefmt='fancy_grid'))
 
         input('Presione una tecla para continuar...')
 

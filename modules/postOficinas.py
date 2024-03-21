@@ -162,8 +162,8 @@ def updateOficina(id):
 
 
 def menu():
-    os.system('clear')
     while True:
+        os.system('clear')
         print("""
                ---ADMINISTRADOR DATOS DE LAS OFICINAS---
           
@@ -191,3 +191,5 @@ def menu():
             break
 
         input('Por favor presione una tecla para continuar... ')
+
+        

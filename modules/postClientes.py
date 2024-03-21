@@ -16,7 +16,7 @@ def postClientes():
                     codigo = input('Ingrese el codigo del cliente => ')
                     if (codigo.isdigit()):
                         codigo = int(codigo)
-                        data = gC.getAllClientsCodigo(codigo)
+                        data = gC.getClienteCodigo(codigo)
                         if(data):
                             raise Exception('El código del cliente ya existe')
                         else:
