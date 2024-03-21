@@ -34,13 +34,13 @@ def postGama():
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8'}
     peticion = requests.post('http://154.38.171.54:5004/gama', headers=headers, data=json.dumps(gama)) 
     res = peticion.json()
-    res ['Mensaje'] = 'Cliente Guardado'
+    res ['Mensaje'] = 'Gama guardado'
     return [res]
 
 def deleteGama(id):
     peticion = requests.delete(f'http://154.38.171.54:5004/gama/{id}')
     if peticion.status_code == 200:
-        print('\nGama eliminadA satisfactoriamente')
+        print('\nGama eliminada satisfactoriamente')
 
 def updateGama(id):
     data = gG.getAllId(id)
