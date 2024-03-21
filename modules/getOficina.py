@@ -8,6 +8,14 @@ def getAllOficina():
    data = peticion.json()
    return data
 
+def getAllId(id):
+   peticion = requests.get(f'http://154.38.171.54:5005/oficinas/{id}')
+   if peticion.ok:
+      return [peticion.json()]
+   else:
+      return []
+
+
 def getOficinaCodigo(codigo):
    for val in getAllOficina():
       if(val.get('codigo_oficina')) == codigo:
