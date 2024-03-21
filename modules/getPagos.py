@@ -9,6 +9,18 @@ def getAllPagos():
    data = peticion.json()
    return data
 
+def getAllId(id):
+   peticion = requests.get(f'http://154.38.171.54:5006/pagos/{id}')
+   if peticion.ok:
+      return [peticion.json()]
+   else:
+      return []
+   
+def getAllClientsCodigo(codigo_cliente):
+   for val in getAllPagos():
+      if (val.get('codigo_cliente') == codigo_cliente):
+         return [val]
+
 
 def getAllClientesPagos2008():
     codigos_clientes_vistos = set() 

@@ -16,7 +16,8 @@ import modules.postEmpleados as CRUDempleados
 
 import modules.getPedidos as pedido
 
-import modules.getPagos as pagos
+import modules.getPagos as Reppagos
+import modules.postPagos as CRUDpagos
 
 import modules.getProducto as Repproducto
 import modules.postProducto as CRUDproducto
@@ -106,6 +107,30 @@ def menuEmpleados():
             print()
             print('SALIENDO...')
             break
+
+def menuPago():
+    while True:
+        os.system('clear')
+        print('''
+                    ---BIENVENIDO AL MENÚ DE PAGOS---
+
+                1. Reportes de los pagos
+                2. Guardar, Actualizar y Eliminar pagos
+
+                        Presiona (Ctrl + C) para Salir
+        ''')
+        try:
+           opcion = (input("\nSelecione una de las opciones: "))
+           if(re.match(r'[0-9]+$', opcion) is not None):
+                 opcion = int(opcion)
+                 if (opcion>=0 and opcion<=2):
+                    if(opcion == 1):
+                        Reppagos.menu()
+                    elif(opcion == 2):
+                        CRUDpagos.menu()
+        except KeyboardInterrupt:
+              print('SALIENDO...')
+              break
 
 def menuProducto():
     while True:
@@ -218,7 +243,7 @@ if __name__ == "__main__":
                     elif opcion == 4:
                         pedido.menu()
                     elif opcion == 5:
-                        pagos.menu()
+                        menuPago()
                     elif opcion == 6:
                         menuProducto()
                     elif opcion == 7:
