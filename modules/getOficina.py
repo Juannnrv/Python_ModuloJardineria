@@ -10,7 +10,7 @@ def getAllOficina():
 
 def getAllId(id):
    peticion = requests.get(f'http://154.38.171.54:5005/oficinas/{id}')
-   if peticion.ok:
+   if (peticion.ok):
       return [peticion.json()]
    else:
       return []
