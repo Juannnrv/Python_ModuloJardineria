@@ -19,13 +19,13 @@ def getAllStocksPriceGama():
     stockPriceGama = []
     for val in getAllDataProduct():
         gama = val.get('gama')
-        stock = val.get('cantidad_en_stock')
+        stock = val.get('cantidadEnStock')
         if gama == 'Ornamentales' and stock >= 100:
             stockPriceGama.append({
                 'codigo_producto': val.get('codigo_producto'),
                 'nombre': val.get('nombre'),
                 'gama': val.get('gama'),
-                'cantidad_en_stock': val.get('cantidad_en_stock'),
+                'cantidadEnStock': val.get('cantidadEnStock'),
                 'precio_venta': val.get('precio_venta')
             })
     stockPriceGama.sort(key=lambda x: x['precio_venta'], reverse=True)
@@ -45,7 +45,7 @@ def menu():
      try:
       
         if opcion == 1:
-         print(tabulate(getAllStocksPriceGama(), headers = "keys", tablefmt= "fancy_grid"))
+         print(tabulate(getAllStocksPriceGama(), headers = "keys", tablefmt= 'fancy_grid'))
 
      except KeyboardInterrupt:
          print()
